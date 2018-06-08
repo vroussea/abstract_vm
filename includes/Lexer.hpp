@@ -9,13 +9,13 @@ class Lexer {
 public:
     Lexer(void);
 
-    Lexer(int);
-
     Lexer(Lexer const &src);
 
     virtual ~Lexer(void);
 
     Lexer &operator=(Lexer const &);
+
+    std::vector<Token> tokenize(const std::vector<std::string> lines) const;
 
 private:
 };

@@ -2,17 +2,7 @@
 #ifndef ABSTRACT_VM_TOKEN_HPP
 #define ABSTRACT_VM_TOKEN_HPP
 
-
 #include <iostream>
-
-/*enum type {
-    input,
-    div,
-    add,
-    mul,
-    sub,
-    dump
-};*/
 
 class Token {
 public:
@@ -24,10 +14,17 @@ public:
 
     Token &operator=(Token const &);
 
-private:
-    //std::string value;
-    //int type;
+    std::string getType() const;
 
+    double getValue() const;
+
+    void setType(std::string type);
+
+    void setValue(double value);
+
+private:
+    std::string type;
+    double value;
 };
 
 std::ostream &operator<<(std::ostream &o, Token const &i);
