@@ -1,7 +1,6 @@
-
 #include <fstream>
 #include <sstream>
-#include "Commands.hpp"
+#include "../includes/Commands.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "Commands.hpp"
+#include "../includes/Commands.hpp"
 
 int main(int argc, char **argv) {
     Commands commands;

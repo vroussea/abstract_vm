@@ -31,7 +31,8 @@ CR_DL =	\xe2\x95\x9a
 
 # comp
 CC =		clang++
-CFLAGS =	-Wall -Wextra -Werror -std=c++11
+CFLAGS =	-Wall -Wextra -Werror
+CPPVERSION =-std=c++11
 
 # binaries
 EXE = abstract_vm
@@ -39,43 +40,53 @@ LIB_A =
 
 # dir
 SRC_DIR =	srcs
+TESTS_DIR = tests
 OBJ_DIR =	objs
 INC_DIR =	includes
 
 # sources
-SRC_NAME =	main.cpp Commands.cpp
-SRC2_NAME =
+MAIN_NAME = main.cpp
+SRC_NAME =	Commands.cpp Lexer.cpp
+TESTS_NAME =testCommands.cpp testLexer.cpp
 
 # objects
 OBJ_NAME =		$(SRC_NAME:.cpp=.o)
-OBJ2_NAME =		$(SRC2_NAME:.cpp=.o)
+OBJ_MAIN_NAME =		$(MAIN_NAME:.cpp=.o)
 
 #paths
 SRC =		$(addprefix $(SRC_DIR)/, $(SRC_NAME))
-SRC2 =		$(addprefix $(SRC_DIR)/, $(SRC2_NAME))
+MAIN =		$(addprefix $(SRC_DIR)/, $(MAIN_NAME))
+TESTS =		$(addprefix $(TESTS_DIR)/, $(TESTS_NAME))
 OBJ =		$(addprefix $(OBJ_DIR)/, $(OBJ_NAME))
-OBJ2 =		$(addprefix $(OBJ_DIR)/, $(OBJ2_NAME))
+OBJ_MAIN =	$(addprefix $(OBJ_DIR)/, $(OBJ_MAIN_NAME))
 INC =		$(addprefix -I, $(INC_DIR))
 
 all :		$(EXE)
-$(EXE) :	$(SRC) $(OBJ)
-		@$(CC) $(OBJ) -o $@
+$(EXE) :	$(SRC) $(OBJ) $(OBJ_MAIN)
+		@$(CC) $(OBJ) $(OBJ_MAIN) -o $@
 		@echo "$(CLEAR)$(LIG)$(BLUE)  Compiling "$()"$(CLEAR)$(LIG)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 		@mkdir -p $(OBJ_DIR) 2> /dev/null || true
-		@$(CC) $(CFLAGS) $(INC) -o $@ -c $<
-norme :
-		@norminette $(SRC) $(SRC2)
+		@$(CC) $(CFLAGS) $(CPPVERSION) $(INC) -o $@ -c $<
+
+tests :
+		$(CC) $(CFLAGS) $(CPPVERSION) $(INC) $(TESTS) $(SRC) -o test
+		./test ; rm test
+
 meteo :
 		@curl http://wttr.in/Paris
+
 clean :
 		@echo "$(CLEAR)$(TRA)$(RED)  Cleaning Object $(CLEAR)$(TRA)"
-		@$(RM) $(OBJ) $(OBJ2)
+		@$(RM) $(OBJ) $(OBJ_MAIN)
 		@rmdir $(OBJ_DIR) 2> /dev/null || true
+
 fclean :	clean
 		@echo "$(CLEAR)$(TRA)$(RED)  Removing Binary $(CLEAR)$(TRA)"
-		@$(RM) $(EXE) $(EXE2)
+		@$(RM) $(EXE)
+
 re :		fclean all
-.PHONY :	all, clean, fclean, re
+
+.PHONY :	all, clean, fclean, re, tests
 .SILENT :
