@@ -1,4 +1,3 @@
-
 #include "../includes/Token.hpp"
 
 /* ******************************* */
@@ -6,6 +5,10 @@
 /* ******************************* */
 
 Token::Token() = default;
+
+Token::Token(std::string const &_data) {
+    setData(_data);
+}
 
 Token::Token(Token const &src) {
     *this = src;
@@ -19,18 +22,14 @@ Token::~Token() = default;
 
 Token &Token::operator=(Token const &rhs) {
     if (this != &rhs) {
-        this->setType(rhs.getType());
-        this->setValue(rhs.getValue());
+        this->setData(rhs.getData());
     }
-
     return *this;
 }
 
 std::ostream &operator<<(std::ostream &o, Token const &instance) {
-    o << "Token type : ";
-    o << instance.getType() << std::endl;
-    o << "Token value : ";
-    o << instance.getValue() << std::endl;
+    o << "Token : ";
+    o << instance.getData() << std::endl;
 
     return o;
 }
@@ -45,20 +44,12 @@ std::ostream &operator<<(std::ostream &o, Token const &instance) {
 /*            Accessors            */
 /* ******************************* */
 
-std::string Token::getType() const {
-    return this->type;
+std::string const Token::getData() const {
+    return this->data;
 }
 
-double Token::getValue() const {
-    return this->value;
-}
-
-void Token::setType(std::string _type) {
-    this->type = _type;
-}
-
-void Token::setValue(double _value) {
-    this->value = _value;
+void Token::setData(std::string const &_data) {
+    this->data = _data;
 }
 
 /* ******************************* */

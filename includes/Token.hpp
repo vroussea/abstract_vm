@@ -4,9 +4,12 @@
 
 #include <iostream>
 
+
 class Token {
 public:
     Token();
+
+    Token(std::string const &_data);
 
     Token(Token const &src);
 
@@ -14,17 +17,14 @@ public:
 
     Token &operator=(Token const &);
 
-    std::string getType() const;
+    std::string const getData() const;
 
-    double getValue() const;
+    void setData(std::string const &data);
 
-    void setType(std::string type);
-
-    void setValue(double value);
+    bool operator==(Token const &);
 
 private:
-    std::string type;
-    double value;
+    std::string data;
 };
 
 std::ostream &operator<<(std::ostream &o, Token const &i);
