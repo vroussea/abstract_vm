@@ -1,35 +1,32 @@
-#include "../includes/Token.hpp"
+
+#include "../includes/Parser.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
 
-Token::Token() = default;
+Parser::Parser() = default;
 
-Token::Token(std::string const &_data) {
-    setData(_data);
-}
-
-Token::Token(Token const &src) {
+Parser::Parser(Parser const &src) {
     *this = src;
 }
 
-Token::~Token() = default;
+Parser::~Parser() = default;
 
 /* ******************************* */
 /*       operators  overload       */
 /* ******************************* */
 
-Token &Token::operator=(Token const &rhs) {
+Parser &Parser::operator=(Parser const &rhs) {
     if (this != &rhs) {
-        this->setData(rhs.getData());
+
     }
+
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &o, Token const &instance) {
-    o << "Token : ";
-    o << instance.getData() << std::endl;
+std::ostream &operator<<(std::ostream &o, Parser const &instance) {
+    o << "The value of  is : ";
 
     return o;
 }
@@ -44,13 +41,7 @@ std::ostream &operator<<(std::ostream &o, Token const &instance) {
 /*            Accessors            */
 /* ******************************* */
 
-std::string const Token::getData() const {
-    return this->data;
-}
 
-void Token::setData(std::string const &_data) {
-    this->data = _data;
-}
 
 /* ******************************* */
 /*            Exceptions           */

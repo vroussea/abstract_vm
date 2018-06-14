@@ -27,7 +27,7 @@ Commands &Commands::operator=(Commands const &rhs) {
 std::ostream &operator<<(std::ostream &o, Commands const &instance) {
     std::vector<std::string> list = instance.getList();
     for (const std::string &command : list)
-        std::cout << command << "\n";
+        std::cout << command << std::endl;
 
     return o;
 }
@@ -53,12 +53,18 @@ void Commands::setCommands(const char *filename) {
 
     std::ifstream file;
 
-    file.open(filename);
-
-    if (file.is_open()) {
-        while (getline(file, line)) {
-            this->list.push_back(line);
+    try {
+        file.open(filename, std::ifstream::in);
+        if (!file.fail()) {
+            while (getline(file, line)) {
+                this->list.push_back(line);
+            }
+        } else {
+            std::cerr << "Error: " << strerror(errno) << std::endl;
         }
+        file.close();
+    } catch (std::exception &e) {
+        std::cout << e.what() << std::endl;
     }
 }
 

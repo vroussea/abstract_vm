@@ -3,10 +3,12 @@ project(abstract_vm)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp tests/testCommands.cpp tests/testLexer.cpp srcs/Token.cpp)
+set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Exceptions.cpp)
 
 set(testCode tests/testCommands.cpp tests/testLexer.cpp)
 
-add_executable(abstract_vm srcs/main.cpp ${sourceCode})
+set(HEADER_FILES includes/Commands.hpp includes/Lexer.hpp includes/Parser.hpp includes/Exceptions.hpp)
 
-add_executable(tests ${sourceCode} ${testCode})
+add_executable(abstract_vm ${HEADER_FILES} srcs/main.cpp ${sourceCode})
+
+add_executable(tests ${HEADER_FILES} ${sourceCode} ${testCode})
