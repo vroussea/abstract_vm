@@ -53,19 +53,16 @@ void Commands::setCommands(const char *filename) {
 
     std::ifstream file;
 
-    try {
-        file.open(filename, std::ifstream::in);
-        if (!file.fail()) {
-            while (getline(file, line)) {
-                this->list.push_back(line);
-            }
-        } else {
-            std::cerr << "Error: " << strerror(errno) << std::endl;
+    file.open(filename, std::ifstream::in);
+    if (!file.fail()) {
+        while (getline(file, line)) {
+            this->list.push_back(line);
         }
-        file.close();
-    } catch (std::exception &e) {
-        std::cout << e.what() << std::endl;
+    } else {
+        std::cerr << "Error: " << strerror(errno) << std::endl;
+        throw std::exception();
     }
+    file.close();
 }
 
 /* ******************************* */

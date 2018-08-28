@@ -1,24 +1,9 @@
+#include "../../includes/exceptions/Exception.hpp"
 
 
 /* ******************************* */
 /*    Constructors & destructor    */
 /* ******************************* */
-
-/*Exceptions::Exceptions() {
-
-}
-
-Exceptions::Exceptions(int) {
-
-}
-
-Exceptions::Exceptions(Exceptions const &src) {
-    *this = src;
-}
-
-Exceptions::~Exceptions() {
-
-}*/
 
 /* ******************************* */
 /*       operators  overload       */
@@ -26,9 +11,12 @@ Exceptions::~Exceptions() {
 
 /* ******************************* */
 /*            Functions            */
+
 /* ******************************* */
 
-
+const char *Exception::what() const throw() {
+    return "Grade would be superior to 1.";
+}
 
 /* ******************************* */
 /*            Accessors            */

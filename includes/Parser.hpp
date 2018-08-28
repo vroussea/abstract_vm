@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include "exceptions/Exception.hpp"
 
 class Parser {
 public:
@@ -16,10 +17,15 @@ public:
 
     Parser &operator=(Parser const &);
 
-private:
-    std::vector<std::exception> exceptions;
-    bool static isErrorMode;
+    const Exception &getExceptions();
 
+    bool isErrorMode();
+
+    void setErrorMode(bool errorMode);
+
+private:
+    Exception exceptions;
+    bool errorMode;
 };
 
 std::ostream &operator<<(std::ostream &o, Parser const &i);
