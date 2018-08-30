@@ -22,9 +22,10 @@ public:
      * gallien
      * ^(((push|assert) )(((int8|int16|int32)\([0-9]+\))|((float|double)\([0-9]+(\.[0-9]+)?\)))|pop|dump|add|sub|mul|div|mod|print|exit)?[[:blank:]]*(;([[:graph:]]|[[:blank:]])*)?
      * moi
-     * ^([\w ().]*)?[[:blank:]]*(;([[:graph:]]|[[:blank:]])*)?
+     * ^[a-z]+( [a-z]+[0-9]*\([0-9]+(\.[0-9]+)?\))?[[:blank:]]*(;([[:graph:]]|[[:blank:]])*)?
      *
      */
+
 private:
     std::string getToken(std::string const &line) const;
 };
