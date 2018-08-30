@@ -47,3 +47,7 @@ std::string Lexer::getToken(std::string const &line) const {
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
+
+const char *Lexer::LexicalErrorException::what() const throw() {
+    return "Lexical error in this line";
+}

@@ -46,7 +46,7 @@ INC_DIR =	includes
 
 # sources
 MAIN_NAME = main.cpp
-SRC_NAME =	Commands.cpp Lexer.cpp Parser.cpp Exceptions.cpp
+SRC_NAME =	Commands.cpp Lexer.cpp Parser.cpp
 TESTS_NAME =testCommands.cpp testLexer.cpp
 
 # objects

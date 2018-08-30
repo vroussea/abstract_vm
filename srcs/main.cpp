@@ -30,7 +30,5 @@ int main(int argc, char **argv) {
     for (std::string const &token : tokens) {
         std::cout << token << std::endl;
     }
-    std::cout << "Exception : " << std::is_scalar<std::exception>::value << std::endl;
-    std::cout << "int : " << std::is_scalar<int>::value << std::endl;
     return 0;
 }

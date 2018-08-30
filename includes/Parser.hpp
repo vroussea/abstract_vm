@@ -5,7 +5,6 @@
 
 #include <iostream>
 #include <vector>
-#include "exceptions/Exception.hpp"
 
 class Parser {
 public:
@@ -17,14 +16,54 @@ public:
 
     Parser &operator=(Parser const &);
 
-    const Exception &getExceptions();
+    //const Exception &getExceptions();
 
     bool isErrorMode();
 
     void setErrorMode(bool errorMode);
 
+    class UnknownIntructionException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class OverflowException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class UnderflowException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class PopOnEmptyStackException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class ForbiddenMathsException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class NoExitInstructionException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class FalseAssertException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class TooFewValuesException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
 private:
-    Exception exceptions;
+    //Exception exceptions;
     bool errorMode;
 };
 
