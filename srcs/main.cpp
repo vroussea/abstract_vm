@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 #include "../includes/Commands.hpp"
 #include "../includes/Lexer.hpp"
 #include "../includes/Parser.hpp"
@@ -25,10 +24,5 @@ int main(int argc, char **argv) {
     }
     std::cout << "### commands :" << std::endl;
     std::cout << commands;
-    std::vector<std::string> tokens = Lexer::getTokens(commands.getList());
-    std::cout << "### tokens :" << std::endl;
-    for (std::string const &token : tokens) {
-        std::cout << token << std::endl;
-    }
     return 0;
 }

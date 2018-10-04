@@ -12,30 +12,11 @@
 /*            Functions            */
 /* ******************************* */
 
-std::vector<std::string> Lexer::getTokens(std::vector<std::string> const &lines) {
-    std::vector<std::string> tokens;
-    Lexer lexer;
-    for (std::string const &line : lines) {
-        try {
-            std::string token = lexer.getToken(line);
-            if (!token.empty())
-                tokens.push_back(token);
-        } catch (std::exception &e) {
-            std::cout << "Error : " << e.what() << std::endl;
-        }
-    }
-    return tokens;
-}
-
-std::string Lexer::getToken(std::string const &line) const {
-    std::regex regex("^[^;^\\n]*");
-    std::smatch match;
-
-    if (std::regex_search(line, match, regex)) {
-        return match.str();
-    } else {
-        throw std::exception();
-    }
+bool Lexer::doesExist(std::string expression) {
+    if (std::regex_match(expression, std::regex(
+            "^(((push|assert) )(((int8|int16|int32)\\([0-9]+\\))|((float|double)\\([0-9]+(\\.[0-9]+)?\\)))|pop|dump|add|sub|mul|div|mod|print|exit)?(;([[:graph:]]|[[:blank:]])*)$")))
+        return true;
+    return false;
 }
 
 /* ******************************* */
@@ -48,6 +29,6 @@ std::string Lexer::getToken(std::string const &line) const {
 /*            Exceptions           */
 /* ******************************* */
 
-const char *Lexer::LexicalErrorException::what() const throw() {
+const char *Lexer::LexicalErrorException::what() const noexcept {
     return "Lexical error in this line";
 }

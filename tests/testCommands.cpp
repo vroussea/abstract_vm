@@ -3,7 +3,7 @@
 #include "catch.hpp"
 #include "../includes/Commands.hpp"
 
-TEST_CASE("Test with file", "[test with file]") {
+TEST_CASE("Test with file") {
     Commands commands;
     std::string fileName = "commands/test1";
     std::ifstream file(fileName);

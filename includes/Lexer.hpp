@@ -4,17 +4,18 @@
 #include <vector>
 #include <iostream>
 #include <regex>
+#include "Token.hpp"
 
 class Lexer {
 public:
-    std::vector<std::string> static getTokens(std::vector<std::string> const &lines);
+    bool doesExist(std::string expression);
+
+    Token getInstruction(std::string &expression);
 
     class LexicalErrorException : public std::exception {
     public:
         virtual const char *what() const throw();
     };
-
-
 
     /*
      *
@@ -27,7 +28,6 @@ public:
      */
 
 private:
-    std::string getToken(std::string const &line) const;
 };
 
 #endif
