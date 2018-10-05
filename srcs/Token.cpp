@@ -5,11 +5,13 @@
 /*    Constructors & destructor    */
 /* ******************************* */
 
-Token::Token() {
+Token::Token() = default;
+
+Token::Token(int _tokkenType) : tokenType(_tokkenType) {
 
 }
 
-Token::Token(TokenType _tokkenType, double _value) : tokenType(_tokkenType), tokenValue(_value) {
+Token::Token(int _tokkenType, double _value) : tokenType(_tokkenType), tokenValue(_value) {
 
 }
 
@@ -17,9 +19,7 @@ Token::Token(Token const &src) {
     *this = src;
 }
 
-Token::~Token() {
-
-}
+Token::~Token() = default;
 
 /* ******************************* */
 /*       operators  overload       */
@@ -28,6 +28,8 @@ Token::~Token() {
 Token &Token::operator=(Token const &rhs) {
     if (this != &rhs) {
         this->setTokenType(rhs.getTokenType());
+        this->setCommandType(rhs.getCommandType());
+        this->setValueType(rhs.getValueType());
         this->setTokenValue(rhs.getTokenValue());
     }
 
@@ -36,9 +38,13 @@ Token &Token::operator=(Token const &rhs) {
 
 std::ostream &operator<<(std::ostream &o, Token const &instance) {
     o << "Token type : ";
-    o << instance.getTokenType();
+    o << instance.getTokenType() << std::endl;
+    o << "Command type : ";
+    o << instance.getCommandType() << std::endl;
+    o << "Value type : ";
+    o << instance.getValueType() << std::endl;
     o << "Token value : ";
-    o << instance.getTokenValue();
+    o << instance.getTokenValue() << std::endl;
     return o;
 }
 
@@ -52,12 +58,28 @@ std::ostream &operator<<(std::ostream &o, Token const &instance) {
 /*            Accessors            */
 /* ******************************* */
 
-Token::TokenType Token::getTokenType() const {
+int Token::getTokenType() const {
     return tokenType;
 }
 
-void Token::setTokenType(Token::TokenType tokkenType) {
+void Token::setTokenType(int tokkenType) {
     Token::tokenType = tokkenType;
+}
+
+int Token::getCommandType() const {
+    return commandType;
+}
+
+void Token::setCommandType(int commandType) {
+    Token::commandType = commandType;
+}
+
+int Token::getValueType() const {
+    return valueType;
+}
+
+void Token::setValueType(int valueType) {
+    Token::valueType = valueType;
 }
 
 double Token::getTokenValue() const {
@@ -69,6 +91,7 @@ void Token::setTokenValue(double tokkenValue) {
 }
 
 /* ******************************* */
+
 /*            Exceptions           */
 /* ******************************* */
 

@@ -4,15 +4,30 @@
 #include <vector>
 #include <iostream>
 #include <regex>
+#include <map>
 #include "Token.hpp"
 
 class Lexer {
 public:
     bool doesExist(std::string expression);
 
-    Token getInstruction(std::string &expression);
+    //Token getInstruction(std::string &expression);
+    Token findComment(std::string &expression);
+
+    Token findCommand(std::string &expression);
+
+    Token findType(std::string &expression);
+
+    Token findValue(std::string &expression);
+
+    Token findBracket(std::string &expression);
 
     class LexicalErrorException : public std::exception {
+    public:
+        virtual const char *what() const throw();
+    };
+
+    class UnknownIntructionException : public std::exception {
     public:
         virtual const char *what() const throw();
     };
@@ -27,7 +42,10 @@ public:
      *
      */
 
-private:
+protected:
+    typedef std::map<std::string, int> StringToEnumMap;
+    static StringToEnumMap commandsMap;
+    static StringToEnumMap typesMap;
 };
 
 #endif

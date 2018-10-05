@@ -9,23 +9,20 @@ class Token {
 public:
 
     typedef enum {
-        push,
-        assert,
-        pop,
-        dump,
-        add,
-        sub,
-        mul,
-        div,
-        mod,
-        print,
-        exit
-        /*int8|int16|int32|float|double*/
+        COMMAND, VALUE, TYPE, BRACKET_OPENER, BRACKET_CLOSER, COMMENT, NULLTYPE
     } TokenType;
 
-    Token();
+    typedef enum {
+        PUSH, ASSERT, POP, DUMP, ADD, SUB, MUL, DIV, MOD, PRINT, EXIT
+    } CommandType;
 
-    Token(TokenType _tokkenType, double _value);
+    typedef enum {
+        INT8, INT16, INT32, FLOAT, DOUBLE
+    } ValueType;
+
+    explicit Token(int _tokkenType);
+
+    Token(int _tokkenType, double _value);
 
     Token(Token const &src);
 
@@ -33,18 +30,29 @@ public:
 
     Token &operator=(Token const &);
 
-    TokenType getTokenType() const;
+    int getTokenType() const;
 
-    void setTokenType(TokenType tokkenType);
+    void setTokenType(int tokkenType);
 
     double getTokenValue() const;
 
     void setTokenValue(double tokkenValue);
 
+    int getCommandType() const;
+
+    void setCommandType(int commandType);
+
+    int getValueType() const;
+
+    void setValueType(int valueType);
+
 
 private:
+    Token();
 
-    TokenType tokenType;
+    int tokenType;
+    int commandType;
+    int valueType;
     double tokenValue;
 };
 

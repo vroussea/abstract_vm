@@ -22,44 +22,40 @@ public:
 
     void setErrorMode(bool errorMode);
 
-    class UnknownIntructionException : public std::exception {
-    public:
-        virtual const char *what() const throw();
-    };
 
     class OverflowException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
     class UnderflowException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
     class PopOnEmptyStackException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
     class ForbiddenMathsException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
     class NoExitInstructionException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
     class FalseAssertException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
     class TooFewValuesException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        virtual const char *what() const noexcept;
     };
 
 private:
