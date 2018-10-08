@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp)
 
-set(testCode tests/testCommands.cpp tests/testCommentsLexer.cpp tests/testCommandsLexer.cpp tests/testTypeLexer.cpp tests/testBracketsLexer.cpp)
+set(testCode tests/testCommands.cpp tests/testCommentsLexer.cpp tests/testCommandsLexer.cpp tests/testTypeLexer.cpp tests/testBracketsLexer.cpp tests/testValuesLexer.cpp)
 
 set(HEADER_FILES includes/Commands.hpp includes/Lexer.hpp includes/Parser.hpp includes/Token.hpp)
 

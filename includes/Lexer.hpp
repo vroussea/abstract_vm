@@ -9,9 +9,13 @@
 
 class Lexer {
 public:
-    bool doesExist(std::string expression);
 
-    //Token getInstruction(std::string &expression);
+    typedef std::map<std::string, int> StringToEnumMap;
+
+    Lexer();
+
+    virtual ~Lexer();
+
     Token findComment(std::string &expression);
 
     Token findCommand(std::string &expression);
@@ -24,13 +28,21 @@ public:
 
     class LexicalErrorException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
 
     class UnknownIntructionException : public std::exception {
     public:
-        virtual const char *what() const throw();
+        const char *what() const noexcept override;
     };
+
+    const StringToEnumMap &getCommandsMap() const;
+
+    void setCommandsMap(const StringToEnumMap &commandsMap);
+
+    const StringToEnumMap &getTypesMap() const;
+
+    void setTypesMap(const StringToEnumMap &typesMap);
 
     /*
      *
@@ -42,10 +54,15 @@ public:
      *
      */
 
-protected:
-    typedef std::map<std::string, int> StringToEnumMap;
-    static StringToEnumMap commandsMap;
-    static StringToEnumMap typesMap;
+private:
+    Lexer(Lexer const &src);
+
+    StringToEnumMap commandsMap;
+    StringToEnumMap typesMap;
+
+    Lexer &operator=(Lexer const &);
 };
+
+std::ostream &operator<<(std::ostream &o, Lexer const &i);
 
 #endif
