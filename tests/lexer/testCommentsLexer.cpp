@@ -1,5 +1,5 @@
-#include "catch.hpp"
-#include "../includes/Lexer.hpp"
+#include "../catch.hpp"
+#include "../../includes/Lexer.hpp"
 
 TEST_CASE("test no comment") {
     Lexer lexer;
