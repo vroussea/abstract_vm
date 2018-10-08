@@ -22,7 +22,6 @@ int main(int argc, char **argv) {
         std::cout << "Error at execution" << std::endl;
         return 1;
     }
-    std::cout << "### commands :" << std::endl;
-    std::cout << commands;
+    //parser.startParsing(commands);
     return 0;
 }

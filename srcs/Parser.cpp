@@ -19,28 +19,15 @@ Parser::~Parser() = default;
 
 Parser &Parser::operator=(Parser const &rhs) {
     if (this != &rhs) {
-
+        this->lexer = rhs.lexer;
+        this->setErrorMode(rhs.isErrorMode());
     }
 
     return *this;
 }
 
-/*const Exception &Parser::getExceptions() {
-    return this->exceptions;
-}*/
-
-bool Parser::isErrorMode() {
-    return this->errorMode;
-}
-
-void Parser::setErrorMode(bool errorMode) {
-    this->errorMode = errorMode;
-}
-
-
 std::ostream &operator<<(std::ostream &o, Parser const &) {
-    o << "The value of  is : ";
-
+    o << "Parser" << std::endl;
     return o;
 }
 
@@ -54,7 +41,21 @@ std::ostream &operator<<(std::ostream &o, Parser const &) {
 /*            Accessors            */
 /* ******************************* */
 
+bool Parser::isErrorMode() const {
+    return this->errorMode;
+}
 
+void Parser::setErrorMode(bool errorMode) {
+    this->errorMode = errorMode;
+}
+
+const Lexer &Parser::getLexer() const {
+    return lexer;
+}
+
+void Parser::setLexer(const Lexer &lexer) {
+    Parser::lexer = lexer;
+}
 
 /* ******************************* */
 /*            Exceptions           */

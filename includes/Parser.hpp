@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <vector>
+#include "Lexer.hpp"
 
 class Parser {
 public:
@@ -16,51 +17,54 @@ public:
 
     Parser &operator=(Parser const &);
 
-    //const Exception &getExceptions();
-
-    bool isErrorMode();
+    bool isErrorMode() const;
 
     void setErrorMode(bool errorMode);
 
+    const Lexer &getLexer() const;
+
+    void setLexer(const Lexer &lexer);
 
     class OverflowException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
     class UnderflowException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
     class PopOnEmptyStackException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
     class ForbiddenMathsException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
     class NoExitInstructionException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
     class FalseAssertException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
     class TooFewValuesException : public std::exception {
     public:
-        virtual const char *what() const noexcept;
+        const char *what() const noexcept override;
     };
 
+
 private:
-    //Exception exceptions;
     bool errorMode;
+    Lexer lexer;
+
 };
 
 std::ostream &operator<<(std::ostream &o, Parser const &i);

@@ -14,7 +14,11 @@ public:
 
     Lexer();
 
+    Lexer(Lexer const &src);
+
     virtual ~Lexer();
+
+    Lexer &operator=(Lexer const &);
 
     Token findComment(std::string &expression);
 
@@ -44,23 +48,11 @@ public:
 
     void setTypesMap(const StringToEnumMap &typesMap);
 
-    /*
-     *
-     * regex
-     * gallien
-     * ^(((push|assert) )(((int8|int16|int32)\([0-9]+\))|((float|double)\([0-9]+(\.[0-9]+)?\)))|pop|dump|add|sub|mul|div|mod|print|exit)?[[:blank:]]*(;([[:graph:]]|[[:blank:]])*)?
-     * moi
-     * ^[a-z]+( [a-z]+[0-9]*\([0-9]+(\.[0-9]+)?\))?[[:blank:]]*(;([[:graph:]]|[[:blank:]])*)?
-     *
-     */
-
 private:
-    Lexer(Lexer const &src);
 
     StringToEnumMap commandsMap;
     StringToEnumMap typesMap;
 
-    Lexer &operator=(Lexer const &);
 };
 
 std::ostream &operator<<(std::ostream &o, Lexer const &i);
