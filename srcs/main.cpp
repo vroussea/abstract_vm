@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
         std::cout << "Error with arguments" << std::endl;
         return 1;
     } else if (argc == 3 && strncmp(argv[1], "-e", 2) == 0) {
-        parser.setErrorMode(true);
+        parser.setErrorMode();
     }
     try {
         if (argc == 1)
@@ -22,6 +22,6 @@ int main(int argc, char **argv) {
         std::cout << "Error at execution" << std::endl;
         return 1;
     }
-    //parser.startParsing(commands);
+    parser.parse(commands.getList());
     return 0;
 }

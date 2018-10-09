@@ -43,7 +43,6 @@ void Commands::setCommands() {
         std::cin >> input;
         this->list.push_back(input);
     }
-
     this->list.pop_back();
 }
 
