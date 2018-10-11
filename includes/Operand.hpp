@@ -4,8 +4,9 @@
 
 
 #include <iostream>
+#include "IOperand.hpp"
 
-class Operand {
+class Operand : public IOperand {
 public:
     Operand();
 

@@ -11,7 +11,7 @@ set(testParserCode tests/parser/testPushAssertParser.cpp tests/parser/testSingle
 
 set(testMainCode tests/testCommands.cpp)
 
-set(HEADER_FILES includes/Commands.hpp includes/Lexer.hpp includes/Parser.hpp includes/Token.hpp)
+set(HEADER_FILES includes/Commands.hpp includes/Lexer.hpp includes/Parser.hpp includes/Token.hpp includes/Stack.hpp includes/Operand.hpp includes/IOperand.hpp includes/eOperandType.hpp)
 
 add_executable(abstract_vm ${HEADER_FILES} srcs/main.cpp ${sourceCode})
 
