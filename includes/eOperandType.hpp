@@ -1,0 +1,8 @@
+#ifndef ABSTRACT_VM_EOPERANDTYPE_HPP
+#define ABSTRACT_VM_EOPERANDTYPE_HPP
+
+typedef enum {
+    INT8, INT16, INT32, FLOAT, DOUBLE
+} eOperandType;
+
+#endif

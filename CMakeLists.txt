@@ -3,7 +3,7 @@ project(abstract_vm)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp srcs/Stack.cpp)
+set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp srcs/Stack.cpp srcs/Operand.cpp)
 
 set(testLexerCode tests/lexer/testCommentsLexer.cpp tests/lexer/testCommandsLexer.cpp tests/lexer/testTypeLexer.cpp tests/lexer/testBracketsLexer.cpp tests/lexer/testValuesLexer.cpp)
 
