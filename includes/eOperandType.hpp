@@ -2,7 +2,7 @@
 #define ABSTRACT_VM_EOPERANDTYPE_HPP
 
 typedef enum {
-    INT8, INT16, INT32, FLOAT, DOUBLE
+    Int8, Int16, Int32, Float, Double
 } eOperandType;
 
 #endif
