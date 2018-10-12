@@ -61,8 +61,7 @@ Token Lexer::findComment(std::string &expression) {
 
     if (std::regex_search(expression, smatch, std::regex(";[[:print:]]*"))) {
         size_t pos = expression.find(smatch[0]);
-        if (pos != std::string::npos)
-            expression.erase(pos, static_cast<unsigned long>(smatch[0].length()));
+        expression.erase(pos, static_cast<unsigned long>(smatch[0].length()));
         return Token(Token::TokenType::COMMENT);
     }
     return Token(Token::TokenType::NULLTYPE);
@@ -74,8 +73,7 @@ Token Lexer::findCommand(std::string &expression) {
     if (std::regex_search(expression, smatch, std::regex("^(push|assert|pop|dump|add|sub|mul|div|mod|print|exit)"))) {
         std::string commandName = smatch[0];
         size_t pos = expression.find(commandName);
-        if (pos != std::string::npos)
-            expression.erase(pos, commandName.length());
+        expression.erase(pos, commandName.length());
         Token token(Token::COMMAND);
         token.setCommandType(getCommandsMap().at(commandName));
         return token;
@@ -89,8 +87,7 @@ Token Lexer::findType(std::string &expression) {
     if (std::regex_search(expression, smatch, std::regex("^ (int(8|16|32)|float|double)"))) {
         std::string typeName = smatch[0];
         size_t pos = expression.find(typeName);
-        if (pos != std::string::npos)
-            expression.erase(pos, typeName.length());
+        expression.erase(pos, typeName.length());
         typeName.erase(0, 1);
         Token token(Token::TYPE);
         token.setValueType(getTypesMap().at(typeName));
@@ -105,8 +102,7 @@ Token Lexer::findValue(std::string &expression) {
     if (std::regex_search(expression, smatch, std::regex("^[0-9]+(.[0-9]+)?"))) {
         std::string value = smatch[0];
         size_t pos = expression.find(value);
-        if (pos != std::string::npos)
-            expression.erase(pos, value.length());
+        expression.erase(pos, value.length());
         Token token(Token::VALUE);
         token.setTokenValue(std::stod(value));
         return token;
@@ -120,8 +116,7 @@ Token Lexer::findBracket(std::string &expression) {
     if (std::regex_search(expression, smatch, std::regex("^\\(|\\)"))) {
         std::string bracket = smatch[0];
         size_t pos = expression.find(bracket);
-        if (pos != std::string::npos)
-            expression.erase(pos, bracket.length());
+        expression.erase(pos, bracket.length());
         if (bracket == "(") {
             Token token(Token::BRACKET_OPENER);
             return token;

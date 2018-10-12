@@ -7,36 +7,21 @@
 
 Parser::Parser() {
     this->errorModeMethods = &Parser::withoutErrorMode;
-    Parser::ParserMethodPointer addMethod = &Parser::pushAssertCommand;
-    this->instructionMethods.push_back(addMethod);
-    addMethod = &Parser::littleCommand;
-    this->instructionMethods.push_back(addMethod);
+    this->instructionMethods.at(0) = &Parser::pushAssertCommand;
+    this->instructionMethods.at(1) = &Parser::littleCommand;
 
-    Parser::ParamStackMethodPointer addParamMethod = &Stack::push;
-    this->paramStackMethods.push_back(addParamMethod);
-    addParamMethod = &Stack::assert;
-    this->paramStackMethods.push_back(addParamMethod);
+    this->paramStackMethods.at(0) = &Stack::push;
+    this->paramStackMethods.at(1) = &Stack::assert;
 
-    Parser::SimpleStackMethodPointer addLittleMethod = &Stack::pop;
-    this->littleStackMethods.push_back(addLittleMethod);
-    this->littleStackMethods.push_back(addLittleMethod);
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::dump;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::add;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::sub;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::mul;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::div;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::mod;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::print;
-    this->littleStackMethods.push_back(addLittleMethod);
-    addLittleMethod = &Stack::exit;
-    this->littleStackMethods.push_back(addLittleMethod);
+    this->littleStackMethods.at(2) = &Stack::pop;
+    this->littleStackMethods.at(3) = &Stack::dump;
+    this->littleStackMethods.at(4) = &Stack::add;
+    this->littleStackMethods.at(5) = &Stack::sub;
+    this->littleStackMethods.at(6) = &Stack::mul;
+    this->littleStackMethods.at(7) = &Stack::div;
+    this->littleStackMethods.at(8) = &Stack::mod;
+    this->littleStackMethods.at(9) = &Stack::print;
+    this->littleStackMethods.at(10) = &Stack::exit;
 }
 
 Parser::Parser(Parser const &src) {
@@ -133,14 +118,6 @@ void Parser::parse(std::vector<std::string> list) {
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
-
-const Lexer &Parser::getLexer() const {
-    return lexer;
-}
-
-void Parser::setLexer(const Lexer &lexer) {
-    Parser::lexer = lexer;
-}
 
 /* ******************************* */
 /*            Exceptions           */

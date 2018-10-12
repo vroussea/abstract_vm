@@ -7,6 +7,7 @@
 #include <vector>
 #include "Lexer.hpp"
 #include <sstream>
+#include <array>
 #include "../includes/Stack.hpp"
 
 class Parser {
@@ -29,10 +30,6 @@ public:
     Parser &operator=(Parser const &);
 
     void setErrorMode();
-
-    const Lexer &getLexer() const;
-
-    void setLexer(const Lexer &lexer);
 
     class OverflowException : public std::exception {
     public:
@@ -82,9 +79,9 @@ public:
 private:
     size_t lineNumber;
     Parser::ParserErrorMethodPointer errorModeMethods;
-    std::vector<Parser::ParserMethodPointer> instructionMethods;
-    std::vector<Parser::ParamStackMethodPointer> paramStackMethods;
-    std::vector<Parser::SimpleStackMethodPointer> littleStackMethods;
+    std::array<Parser::ParserMethodPointer, 2> instructionMethods;
+    std::array<Parser::ParamStackMethodPointer, 2> paramStackMethods;
+    std::array<Parser::SimpleStackMethodPointer, 11> littleStackMethods;
     std::vector<std::string> allErrors;
     Lexer lexer;
 };
