@@ -15,10 +15,10 @@ TEST_CASE("test operand precision is ok") {
     REQUIRE(testInt8.getPrecision() == static_cast<int>(eOperandType::Int8));
 }
 
-TEST_CASE("test operand is ok") {
-    char value = static_cast<char>(5);
+TEST_CASE("test operand creation works") {
+    char value = static_cast<auto>(5);
     Operand<int> testInt8(eOperandType::Int8, value, CHAR_MIN, CHAR_MAX);
+    Operand<int> secondTestInt8(eOperandType::Int8, value, CHAR_MIN, CHAR_MAX);
 
-    std::cout << testInt8.toString();
-    REQUIRE(true);
+    REQUIRE(testInt8.toString() == secondTestInt8.toString());
 }

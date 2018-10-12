@@ -9,7 +9,7 @@ set(testLexerCode tests/lexer/testCommentsLexer.cpp tests/lexer/testCommandsLexe
 
 set(testParserCode tests/parser/testPushAssertParser.cpp tests/parser/testSingleParameterCommandParser.cpp)
 
-set(testOperandCode tests/operand/testCreateOperand.cpp)
+set(testOperandCode tests/operand/testCreateOperand.cpp tests/operand/testAddOperand.cpp)
 
 set(testMainCode tests/testCommands.cpp)
 

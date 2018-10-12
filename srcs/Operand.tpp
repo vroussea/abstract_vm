@@ -3,8 +3,6 @@
 #include <sstream>
 #include <iostream>
 
-//#define CHAR_MIN = std::numeric_limits<char>::min();
-
 template<typename T>
 class Operand : public IOperand {
 public:
@@ -48,13 +46,6 @@ public:
 /*            Functions            */
 /* ******************************* */
 
-    int getPrecision(void) const {
-        return this->precision;
-    }
-
-    eOperandType getType(void) const {
-        return this->type;
-    }
 
     IOperand const *operator+(IOperand const &rhs) const {
         return this;
@@ -76,15 +67,33 @@ public:
         return this;
     }
 
-    std::string const &toString(void) const {
-        return this->str;
-    }
-
-
 /* ******************************* */
 /*            Accessors            */
 /* ******************************* */
 
+    int getPrecision(void) const {
+        return this->precision;
+    }
+
+    eOperandType getType(void) const {
+        return this->type;
+    }
+
+    std::string const &toString(void) const {
+        return this->str;
+    }
+
+    const T getValue() const {
+        return value;
+    }
+
+    const T getMin() const {
+        return min;
+    }
+
+    const T getMax() const {
+        return max;
+    }
 
 
 /* ******************************* */
@@ -93,9 +102,9 @@ public:
 
 private:
     std::string str;
-    int precision;
-    eOperandType type;
-    T value;
-    T min;
-    T max;
+    int const precision;
+    eOperandType const type;
+    T const value;
+    T const min;
+    T const max;
 };
