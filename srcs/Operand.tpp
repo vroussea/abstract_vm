@@ -1,3 +1,6 @@
+#ifndef ABSTRACT_VM_OPERAND_HPP
+#define ABSTRACT_VM_OPERAND_HPP
+
 #include "../includes/IOperand.hpp"
 
 #include <sstream>
@@ -36,7 +39,12 @@ public:
 
     Operand &operator=(Operand const &rhs) {
         if (this != &rhs) {
-
+            this->str = rhs.toString();
+            this->precision = getPrecision();
+            this->type = getType();
+            this->value = getValue();
+            this->min = getMin();
+            this->max = getMax();
         }
 
         return *this;
@@ -108,3 +116,5 @@ private:
     T const min;
     T const max;
 };
+
+#endif

@@ -56,14 +56,14 @@ void Parser::pushAssertCommand(std::string expression, Token commandToken) {
     try {
         Token typeToken = lexer.findType(expression);
         if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_OPENER)
-            throw Lexer::LexicalErrorException();
+            throw LexerExceptions::LexicalErrorException();
         Token valueToken = lexer.findValue(expression);
         if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_CLOSER)
-            throw Lexer::LexicalErrorException();
+            throw LexerExceptions::LexicalErrorException();
         if (!expression.empty())
-            throw Lexer::LexicalErrorException();
+            throw LexerExceptions::LexicalErrorException();
         paramStackMethods[commandToken.getTokenType()];
-    } catch (Lexer::LexicalErrorException const &e) {
+    } catch (LexerExceptions::LexicalErrorException const &e) {
         throw e;
     } catch (std::exception const &e) {
         throw e;
@@ -73,9 +73,9 @@ void Parser::pushAssertCommand(std::string expression, Token commandToken) {
 void Parser::littleCommand(std::string expression, Token commandToken) {
     try {
         if (!expression.empty())
-            throw Lexer::LexicalErrorException();
+            throw LexerExceptions::LexicalErrorException();
         littleStackMethods[commandToken.getTokenType()];
-    } catch (Lexer::LexicalErrorException const &e) {
+    } catch (LexerExceptions::LexicalErrorException const &e) {
         throw e;
     } catch (std::exception const &e) {
         throw e;
@@ -123,20 +123,10 @@ void Parser::parse(std::vector<std::string> list) {
 /*            Exceptions           */
 /* ******************************* */
 
-const char *Parser::OverflowException::what() const noexcept {
-    return "Overflow in this line";
-}
 
-const char *Parser::UnderflowException::what() const noexcept {
-    return "Underflow in this line";
-}
 
 const char *Parser::PopOnEmptyStackException::what() const noexcept {
     return "Pop on empty stack in this line";
-}
-
-const char *Parser::ForbiddenMathsException::what() const noexcept {
-    return "Division/modulo by 0 in this line";
 }
 
 const char *Parser::NoExitInstructionException::what() const noexcept {

@@ -127,7 +127,7 @@ TEST_CASE("test wrong command") {
 
     std::string expression = "gregexit";
 
-    REQUIRE_THROWS_AS(lexer.findCommand(expression).getCommandType(), Lexer::UnknownIntructionException);
+    REQUIRE_THROWS_AS(lexer.findCommand(expression).getCommandType(), LexerExceptions::UnknownIntructionException);
 }
 
 TEST_CASE("test command is erased from the line") {

@@ -1,5 +1,6 @@
 #include "../catch.hpp"
 #include "../../includes/Lexer.hpp"
+#include "../../includes/eOperandType.hpp"
 
 
 TEST_CASE("test type token") {
@@ -19,7 +20,7 @@ TEST_CASE("test type int8") {
 
     Token token = lexer.findType(expression);
 
-    REQUIRE(token.getValueType() == Token::ValueType::INT8);
+    REQUIRE(token.getValueType() == eOperandType::Int8);
 }
 
 TEST_CASE("test type int16") {
@@ -29,7 +30,7 @@ TEST_CASE("test type int16") {
 
     Token token = lexer.findType(expression);
 
-    REQUIRE(token.getValueType() == Token::ValueType::INT16);
+    REQUIRE(token.getValueType() == eOperandType::Int16);
 }
 
 TEST_CASE("test type int32") {
@@ -39,7 +40,7 @@ TEST_CASE("test type int32") {
 
     Token token = lexer.findType(expression);
 
-    REQUIRE(token.getValueType() == Token::ValueType::INT32);
+    REQUIRE(token.getValueType() == eOperandType::Int32);
 }
 
 TEST_CASE("test type float") {
@@ -49,7 +50,7 @@ TEST_CASE("test type float") {
 
     Token token = lexer.findType(expression);
 
-    REQUIRE(token.getValueType() == Token::ValueType::FLOAT);
+    REQUIRE(token.getValueType() == eOperandType::Float);
 }
 
 TEST_CASE("test type double") {
@@ -59,7 +60,7 @@ TEST_CASE("test type double") {
 
     Token token = lexer.findType(expression);
 
-    REQUIRE(token.getValueType() == Token::ValueType::DOUBLE);
+    REQUIRE(token.getValueType() == eOperandType::Double);
 }
 
 TEST_CASE("test wrong type") {
@@ -67,7 +68,7 @@ TEST_CASE("test wrong type") {
 
     std::string expression = " gregexit";
 
-    REQUIRE_THROWS_AS(lexer.findType(expression).getCommandType(), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(lexer.findType(expression).getCommandType(), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test type is erased from the line") {

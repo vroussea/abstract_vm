@@ -1,5 +1,5 @@
 
-#include "../includes/Stack.hpp"
+#include "../../includes/exceptions/OperandExceptions.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
@@ -9,8 +9,8 @@
 /*       operators  overload       */
 /* ******************************* */
 
-std::ostream &operator<<(std::ostream &o, Stack const &) {
-    o << "The value of  is : ";
+std::ostream &operator<<(std::ostream &o, OperandExceptions const &) {
+    o << "Nothing";
 
     return o;
 }
@@ -19,49 +19,7 @@ std::ostream &operator<<(std::ostream &o, Stack const &) {
 /*            Functions            */
 /* ******************************* */
 
-void Stack::push(double value) {
 
-}
-
-void Stack::assert(double value) {
-
-}
-
-void Stack::pop() {
-
-}
-
-void Stack::dump() {
-
-}
-
-void Stack::add() {
-
-}
-
-void Stack::sub() {
-
-}
-
-void Stack::mul() {
-
-}
-
-void Stack::div() {
-
-}
-
-void Stack::mod() {
-
-}
-
-void Stack::print() {
-
-}
-
-void Stack::exit() {
-
-}
 
 /* ******************************* */
 /*            Accessors            */
@@ -73,3 +31,14 @@ void Stack::exit() {
 /*            Exceptions           */
 /* ******************************* */
 
+const char *OperandExceptions::OverflowException::what() const noexcept {
+    return "Overflow in this line";
+}
+
+const char *OperandExceptions::UnderflowException::what() const noexcept {
+    return "Underflow in this line";
+}
+
+const char *OperandExceptions::ForbiddenMathsException::what() const noexcept {
+    return "Division/modulo by 0 in this line";
+}

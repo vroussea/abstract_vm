@@ -16,10 +16,6 @@ public:
         PUSH, ASSERT, POP, DUMP, ADD, SUB, MUL, DIV, MOD, PRINT, EXIT
     } CommandType;
 
-    typedef enum {
-        INT8, INT16, INT32, FLOAT, DOUBLE
-    } ValueType;
-
     explicit Token(int _tokkenType);
 
     Token(int _tokkenType, double _value);

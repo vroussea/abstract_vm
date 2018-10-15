@@ -16,7 +16,7 @@ TEST_CASE("test operand precision is ok") {
 }
 
 TEST_CASE("test operand creation works") {
-    char value = static_cast<auto>(5);
+    char value = static_cast<char>(5);
     Operand<int> testInt8(eOperandType::Int8, value, CHAR_MIN, CHAR_MAX);
     Operand<int> secondTestInt8(eOperandType::Int8, value, CHAR_MIN, CHAR_MAX);
 

@@ -31,22 +31,9 @@ public:
 
     void setErrorMode();
 
-    class OverflowException : public std::exception {
-    public:
-        const char *what() const noexcept override;
-    };
 
-    class UnderflowException : public std::exception {
-    public:
-        const char *what() const noexcept override;
-    };
 
     class PopOnEmptyStackException : public std::exception {
-    public:
-        const char *what() const noexcept override;
-    };
-
-    class ForbiddenMathsException : public std::exception {
     public:
         const char *what() const noexcept override;
     };

@@ -17,5 +17,5 @@ TEST_CASE("test pop with something at the end") {
 
     Token token(Token::ADD);
 
-    REQUIRE_THROWS_AS(parser.littleCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.littleCommand(expression, token), LexerExceptions::LexicalErrorException);
 }

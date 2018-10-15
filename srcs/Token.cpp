@@ -63,7 +63,7 @@ int Token::getTokenType() const {
 }
 
 void Token::setTokenType(int tokkenType) {
-    Token::tokenType = tokkenType;
+    this->tokenType = tokkenType;
 }
 
 int Token::getCommandType() const {
@@ -71,7 +71,7 @@ int Token::getCommandType() const {
 }
 
 void Token::setCommandType(int commandType) {
-    Token::commandType = commandType;
+    this->commandType = commandType;
 }
 
 int Token::getValueType() const {
@@ -79,7 +79,7 @@ int Token::getValueType() const {
 }
 
 void Token::setValueType(int valueType) {
-    Token::valueType = valueType;
+    this->valueType = valueType;
 }
 
 double Token::getTokenValue() const {
@@ -87,7 +87,7 @@ double Token::getTokenValue() const {
 }
 
 void Token::setTokenValue(double tokkenValue) {
-    Token::tokenValue = tokkenValue;
+    this->tokenValue = tokkenValue;
 }
 
 /* ******************************* */

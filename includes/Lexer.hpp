@@ -6,6 +6,7 @@
 #include <regex>
 #include <map>
 #include "Token.hpp"
+#include "exceptions/LexerExceptions.hpp"
 
 class Lexer {
 public:
@@ -29,16 +30,6 @@ public:
     Token findValue(std::string &expression);
 
     Token findBracket(std::string &expression);
-
-    class LexicalErrorException : public std::exception {
-    public:
-        const char *what() const noexcept override;
-    };
-
-    class UnknownIntructionException : public std::exception {
-    public:
-        const char *what() const noexcept override;
-    };
 
     const StringToEnumMap &getCommandsMap() const;
 

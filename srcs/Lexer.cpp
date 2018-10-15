@@ -1,4 +1,5 @@
 #include "../includes/Lexer.hpp"
+#include "../includes/eOperandType.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
@@ -20,11 +21,11 @@ Lexer::Lexer() {
     };
 
     this->typesMap = {
-            {"int8",   Token::ValueType::INT8},
-            {"int16",  Token::ValueType::INT16},
-            {"int32",  Token::ValueType::INT32},
-            {"float",  Token::ValueType::FLOAT},
-            {"double", Token::ValueType::DOUBLE}
+            {"int8",   eOperandType::Int8},
+            {"int16",  eOperandType::Int16},
+            {"int32",  eOperandType::Int32},
+            {"float",  eOperandType::Float},
+            {"double", eOperandType::Double}
     };
 }
 
@@ -47,7 +48,7 @@ Lexer &Lexer::operator=(Lexer const &rhs) {
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &o, Lexer const &instance) {
+std::ostream &operator<<(std::ostream &o, Lexer const &) {
     o << "Lexer" << std::endl;
     return o;
 }
@@ -78,7 +79,7 @@ Token Lexer::findCommand(std::string &expression) {
         token.setCommandType(getCommandsMap().at(commandName));
         return token;
     }
-    throw UnknownIntructionException();
+    throw LexerExceptions::UnknownIntructionException();
 }
 
 Token Lexer::findType(std::string &expression) {
@@ -93,7 +94,7 @@ Token Lexer::findType(std::string &expression) {
         token.setValueType(getTypesMap().at(typeName));
         return token;
     }
-    throw LexicalErrorException();
+    throw LexerExceptions::LexicalErrorException();
 }
 
 Token Lexer::findValue(std::string &expression) {
@@ -107,7 +108,7 @@ Token Lexer::findValue(std::string &expression) {
         token.setTokenValue(std::stod(value));
         return token;
     }
-    throw LexicalErrorException();
+    throw LexerExceptions::LexicalErrorException();
 }
 
 Token Lexer::findBracket(std::string &expression) {
@@ -125,7 +126,7 @@ Token Lexer::findBracket(std::string &expression) {
             return token;
         }
     }
-    throw LexicalErrorException();
+    throw LexerExceptions::LexicalErrorException();
 }
 
 /* ******************************* */
@@ -151,11 +152,3 @@ void Lexer::setTypesMap(const Lexer::StringToEnumMap &typesMap) {
 /* ******************************* */
 /*            Exceptions           */
 /* ******************************* */
-
-const char *Lexer::LexicalErrorException::what() const noexcept {
-    return "Lexical error in this line";
-}
-
-const char *Lexer::UnknownIntructionException::what() const noexcept {
-    return "Unknown instruction in this line";
-}

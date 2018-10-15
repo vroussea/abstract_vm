@@ -19,7 +19,7 @@ TEST_CASE("test push with wrong type") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push without opening bracket") {
@@ -29,7 +29,7 @@ TEST_CASE("test push without opening bracket") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push with wrong opening bracket") {
@@ -39,7 +39,7 @@ TEST_CASE("test push with wrong opening bracket") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push without closing bracket") {
@@ -49,7 +49,7 @@ TEST_CASE("test push without closing bracket") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push with wrong closing bracket") {
@@ -59,7 +59,7 @@ TEST_CASE("test push with wrong closing bracket") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push without value") {
@@ -69,7 +69,7 @@ TEST_CASE("test push without value") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push with wrong value") {
@@ -79,7 +79,7 @@ TEST_CASE("test push with wrong value") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test push with something at the end") {
@@ -89,5 +89,5 @@ TEST_CASE("test push with something at the end") {
 
     Token token(Token::PUSH);
 
-    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
 }

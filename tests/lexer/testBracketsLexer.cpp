@@ -27,7 +27,7 @@ TEST_CASE("test not a bracket exception") {
 
     std::string expression = " gregexit";
 
-    REQUIRE_THROWS_AS(lexer.findBracket(expression).getCommandType(), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(lexer.findBracket(expression).getCommandType(), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test expression is cleaned of first bracket") {

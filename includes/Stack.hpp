@@ -7,15 +7,13 @@
 
 class Stack {
 public:
-    Stack();
+    Stack() = default;
 
-    Stack(int);
+    Stack(Stack const &src) = default;
 
-    Stack(Stack const &src);
+    virtual ~Stack() = default;
 
-    virtual ~Stack();
-
-    Stack &operator=(Stack const &);
+    Stack &operator=(Stack const &) = default;
 
     void push(double value);
 

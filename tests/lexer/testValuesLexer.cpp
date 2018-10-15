@@ -37,7 +37,7 @@ TEST_CASE("test start with . exception") {
 
     std::string expression = ".5";
 
-    REQUIRE_THROWS_AS(lexer.findValue(expression).getCommandType(), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(lexer.findValue(expression).getCommandType(), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test 2 points exception") {
@@ -55,7 +55,7 @@ TEST_CASE("test not a value exception") {
 
     std::string expression = ".5";
 
-    REQUIRE_THROWS_AS(lexer.findValue(expression).getCommandType(), Lexer::LexicalErrorException);
+    REQUIRE_THROWS_AS(lexer.findValue(expression).getCommandType(), LexerExceptions::LexicalErrorException);
 }
 
 TEST_CASE("test expression is cleaned of its value") {
