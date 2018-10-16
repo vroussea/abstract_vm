@@ -6,7 +6,6 @@
 #include <iostream>
 #include <array>
 #include "IOperand.hpp"
-#include "../srcs/Operand.tpp"
 
 class OperandFactory {
 public:

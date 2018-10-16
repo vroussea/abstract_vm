@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp srcs/Stack.cpp srcs/Operand.tpp srcs/OperandFactory.cpp)
+set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp srcs/Stack.cpp srcs/Operand.hpp srcs/OperandFactory.cpp)
 
 set(exceptionSourceCode srcs/exceptions/OperandExceptions.cpp srcs/exceptions/LexerExceptions.cpp)
 
@@ -13,9 +13,9 @@ set(testLexerCode tests/lexer/testCommentsLexer.cpp tests/lexer/testCommandsLexe
 
 set(testParserCode tests/parser/testPushAssertParser.cpp tests/parser/testSingleParameterCommandParser.cpp)
 
-set(testOperandCode tests/operand/testCreateOperand.cpp tests/operand/testAddOperand.cpp)
+set(testOperandCode tests/operand/testCreateOperand.cpp tests/operand/testAddOperand.cpp tests/operand/tesSubOperand.cpp)
 
-set(testOperandFactoryCode tests/operandFactory/testNewCharOperand.cpp)
+set(testOperandFactoryCode tests/operandFactory/testNewCharOperand.cpp tests/operandFactory/testNewShortOperand.cpp tests/operandFactory/testNewIntOperand.cpp tests/operandFactory/testNewFloatOperand.cpp tests/operandFactory/testNewDoubleOperand.cpp)
 
 set(testMainCode tests/testCommands.cpp)
 
@@ -33,5 +33,5 @@ add_executable(testsOperand ${HEADER_FILES} ${EXCEPTION_HEADER_FILES} ${sourceCo
 
 add_executable(testsOperandFactory ${HEADER_FILES} ${EXCEPTION_HEADER_FILES} ${sourceCode} ${exceptionSourceCode} ${testOperandFactoryCode} ${testMainCode})
 
-add_executable(testsAll ${HEADER_FILES} ${EXCEPTION_HEADER_FILES} ${sourceCode} ${exceptionSourceCode} ${testLexerCode} ${testParserCode} ${testMainCode})
+add_executable(testsAll ${HEADER_FILES} ${EXCEPTION_HEADER_FILES} ${sourceCode} ${exceptionSourceCode} ${testLexerCode} ${testParserCode} ${testOperandCode} ${testOperandFactoryCode} ${testMainCode})
 

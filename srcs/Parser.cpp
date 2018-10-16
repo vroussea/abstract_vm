@@ -6,6 +6,8 @@
 /* ******************************* */
 
 Parser::Parser() {
+    this->lineNumber = 1;
+
     this->errorModeMethods = &Parser::withoutErrorMode;
     this->instructionMethods.at(0) = &Parser::pushAssertCommand;
     this->instructionMethods.at(1) = &Parser::littleCommand;
@@ -98,7 +100,6 @@ void Parser::withoutErrorMode(std::string whatHappened) {
 }
 
 void Parser::parse(std::vector<std::string> list) {
-    this->lineNumber = 1;
     for (std::string const &line : list) {
         std::string expression = line;
         lexer.findComment(expression);
