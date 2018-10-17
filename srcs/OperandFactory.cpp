@@ -1,7 +1,8 @@
 
+#include <limits>
 #include "../includes/OperandFactory.hpp"
 #include "../includes/exceptions/OperandExceptions.hpp"
-#include "Operand.hpp"
+#include "../includes/Operand.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
@@ -30,7 +31,7 @@ std::ostream &operator<<(std::ostream &o, OperandFactory const &) {
 /* ******************************* */
 
 IOperand const *OperandFactory::createOperand(eOperandType type, std::string const &value) const {
-    return (this->*createOperandFunctions[type])(value);
+    return dynamic_cast<const IOperand *>((this->*createOperandFunctions[type])(value));
 }
 
 IOperand const *OperandFactory::createInt8(std::string const &value) const {

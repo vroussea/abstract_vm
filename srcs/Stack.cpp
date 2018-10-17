@@ -19,11 +19,11 @@ std::ostream &operator<<(std::ostream &o, Stack const &) {
 /*            Functions            */
 /* ******************************* */
 
-void Stack::push(double value) {
+void Stack::push(double ) {
 
 }
 
-void Stack::assert(double value) {
+void Stack::assert(double ) {
 
 }
 

@@ -1,3 +1,4 @@
+#include <cstring>
 #include "../includes/Commands.hpp"
 
 /* ******************************* */

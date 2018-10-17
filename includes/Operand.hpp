@@ -2,9 +2,9 @@
 #ifndef ABSTRACT_VM_OPERAND_TPP
 #define ABSTRACT_VM_OPERAND_TPP
 
-#include "../includes/IOperand.hpp"
-#include "../includes/OperandFactory.hpp"
-#include "../includes/exceptions/OperandExceptions.hpp"
+#include "IOperand.hpp"
+#include "OperandFactory.hpp"
+#include "exceptions/OperandExceptions.hpp"
 
 #include <sstream>
 
@@ -129,11 +129,11 @@ public:
 
 private:
     OperandFactory operandFactory;
-    std::string value;
-    int const precision;
     eOperandType type;
-    T const min;
-    T const max;
+    int precision;
+    std::string value;
+    T min;
+    T max;
 };
 
 #endif

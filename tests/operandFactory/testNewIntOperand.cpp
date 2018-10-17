@@ -1,11 +1,11 @@
 #include "../catch.hpp"
 #include "../../includes/OperandFactory.hpp"
-#include "../../srcs/Operand.hpp"
+#include "../../includes/Operand.hpp"
 
 TEST_CASE("test new int overflow") {
     OperandFactory operandFactory;
 
-    long max = std::numeric_limits<int>::max();
+    long long max = std::numeric_limits<int>::max();
     max++;
 
     REQUIRE_THROWS_AS(operandFactory.createOperand(eOperandType::Int32, std::to_string(max)),
@@ -15,7 +15,7 @@ TEST_CASE("test new int overflow") {
 TEST_CASE("test new int underflow") {
     OperandFactory operandFactory;
 
-    long min = std::numeric_limits<int>::min();
+    long long min = std::numeric_limits<int>::min();
     min--;
 
     REQUIRE_THROWS_AS(operandFactory.createOperand(eOperandType::Int32, std::to_string(min)),

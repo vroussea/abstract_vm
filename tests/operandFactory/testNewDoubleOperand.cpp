@@ -1,6 +1,6 @@
 #include "../catch.hpp"
 #include "../../includes/OperandFactory.hpp"
-#include "../../srcs/Operand.hpp"
+#include "../../includes/Operand.hpp"
 
 TEST_CASE("test new double overflow") {
     OperandFactory operandFactory;

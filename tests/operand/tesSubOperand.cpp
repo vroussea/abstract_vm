@@ -1,12 +1,12 @@
 #include "../catch.hpp"
 
 #include "../../includes/eOperandType.hpp"
-#include "../../srcs/Operand.hpp"
+#include "../../includes/Operand.hpp"
 
 
 TEST_CASE("test sub two chars") {
-    IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('b'), CHAR_MIN, CHAR_MAX);
-    IOperand *char2 = new Operand<char>(eOperandType::Int8, std::to_string(1), CHAR_MIN, CHAR_MAX);
+    IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('b'), std::numeric_limits<char>::min(), std::numeric_limits<char>::max());
+    IOperand *char2 = new Operand<char>(eOperandType::Int8, std::to_string(1), std::numeric_limits<char>::min(), std::numeric_limits<char>::max());
 
     IOperand const *addResult = (*char1 - *char2);
 
@@ -14,8 +14,8 @@ TEST_CASE("test sub two chars") {
 }
 
 TEST_CASE("test sub short to char") {
-    IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('C'), CHAR_MIN, CHAR_MAX);
-    IOperand *short1 = new Operand<short>(eOperandType::Int16, "1", SHRT_MIN, SHRT_MAX);
+    IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('C'), std::numeric_limits<char>::min(), std::numeric_limits<char>::max());
+    IOperand *short1 = new Operand<short>(eOperandType::Int16, "1", std::numeric_limits<short>::min(), std::numeric_limits<short>::max());
 
     IOperand const *addResult = (*char1 - *short1);
 
@@ -23,8 +23,8 @@ TEST_CASE("test sub short to char") {
 }
 
 TEST_CASE("test sub two shorts") {
-    IOperand *short1 = new Operand<short>(eOperandType::Int16, "10", SHRT_MIN, SHRT_MAX);
-    IOperand *short2 = new Operand<short>(eOperandType::Int16, "5", SHRT_MIN, SHRT_MAX);
+    IOperand *short1 = new Operand<short>(eOperandType::Int16, "10", std::numeric_limits<short>::min(), std::numeric_limits<short>::max());
+    IOperand *short2 = new Operand<short>(eOperandType::Int16, "5", std::numeric_limits<short>::min(), std::numeric_limits<short>::max());
 
     IOperand const *addResult = (*short1 - *short2);
 
@@ -32,8 +32,8 @@ TEST_CASE("test sub two shorts") {
 }
 
 TEST_CASE("test sub two ints") {
-    IOperand *int1 = new Operand<int>(eOperandType::Int32, "2000000001", INT_MIN, INT_MAX);
-    IOperand *int2 = new Operand<int>(eOperandType::Int32, "1", INT_MIN, INT_MAX);
+    IOperand *int1 = new Operand<int>(eOperandType::Int32, "2000000001", std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
+    IOperand *int2 = new Operand<int>(eOperandType::Int32, "1", std::numeric_limits<int>::min(), std::numeric_limits<int>::max());
 
     IOperand const *addResult = (*int1 - *int2);
 
