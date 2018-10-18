@@ -22,6 +22,17 @@ TEST_CASE("test sub short to char") {
     REQUIRE(dynamic_cast<const Operand<short> *>(addResult)->toString() == std::to_string('B'));
 }
 
+TEST_CASE("test sub int to double") {
+    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.1", std::numeric_limits<double>::min(),
+                                            std::numeric_limits<double>::max());
+    IOperand *int1 = new Operand<int>(eOperandType::Int32, "1", std::numeric_limits<int>::min(),
+                                      std::numeric_limits<int>::max());
+
+    IOperand const *addResult = (*double1 - *int1);
+
+    REQUIRE(std::stof(dynamic_cast<const Operand<double> *>(addResult)->toString()) == 0.1f);
+}
+
 TEST_CASE("test sub two shorts") {
     IOperand *short1 = new Operand<short>(eOperandType::Int16, "10", std::numeric_limits<short>::min(), std::numeric_limits<short>::max());
     IOperand *short2 = new Operand<short>(eOperandType::Int16, "5", std::numeric_limits<short>::min(), std::numeric_limits<short>::max());

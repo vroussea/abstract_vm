@@ -7,6 +7,7 @@
 #include "exceptions/OperandExceptions.hpp"
 
 #include <sstream>
+#include <cmath>
 
 template<typename T>
 class Operand : public IOperand {
@@ -49,53 +50,54 @@ public:
 
 
     IOperand const *operator+(IOperand const &rhs) const override {
-        //TODO replace this with if and else
-        if (rhs.getPrecision() > this->getPrecision()) {
-            IOperand const *newThis = operandFactory.createOperand(rhs.getType(), this->toString());
-            IOperand const *newRhs = operandFactory.createOperand(this->getType(), rhs.toString());
-
-            return *newThis + *newRhs;
-        }
-
         long double newValue = std::stold(this->toString()) + std::stold(rhs.toString());
 
-        if (newValue > this->getMax())
-            throw OperandExceptions::OverflowException();
-        if (newValue < this->getMin())
-            throw OperandExceptions::UnderflowException();
-
-        return operandFactory.createOperand(getType(), std::to_string(newValue));
+        if (rhs.getPrecision() > this->getPrecision())
+            return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
+        else
+            return operandFactory.createOperand(getType(), std::to_string(newValue));
     }
 
     IOperand const *operator-(IOperand const &rhs) const override {
-        //TODO replace this with if and else
-        if (rhs.getPrecision() > this->getPrecision()) {
-            IOperand const *newThis = operandFactory.createOperand(rhs.getType(), this->toString());
-            IOperand const *newRhs = operandFactory.createOperand(this->getType(), rhs.toString());
-
-            return *newThis - *newRhs;
-        }
-
         long double newValue = std::stold(this->toString()) - std::stold(rhs.toString());
 
-        if (newValue > this->getMax())
-            throw OperandExceptions::OverflowException();
-        if (newValue < this->getMin())
-            throw OperandExceptions::UnderflowException();
-
-        return operandFactory.createOperand(getType(), std::to_string(newValue));
+        if (rhs.getPrecision() > this->getPrecision())
+            return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
+        else
+            return operandFactory.createOperand(getType(), std::to_string(newValue));
     }
 
     IOperand const *operator*(IOperand const &rhs) const override {
-        return &rhs;
+        long double newValue = std::stold(this->toString()) * std::stold(rhs.toString());
+
+        if (rhs.getPrecision() > this->getPrecision())
+            return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
+        else
+            return operandFactory.createOperand(getType(), std::to_string(newValue));
     }
 
     IOperand const *operator/(IOperand const &rhs) const override {
-        return &rhs;
+        if (std::stold(rhs.toString()) == 0)
+            throw OperandExceptions::ForbiddenMathsException();
+
+        long double newValue = std::stold(this->toString()) / std::stold(rhs.toString());
+
+        if (rhs.getPrecision() > this->getPrecision())
+            return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
+        else
+            return operandFactory.createOperand(getType(), std::to_string(newValue));
     }
 
     IOperand const *operator%(IOperand const &rhs) const override {
-        return &rhs;
+        if (std::stold(rhs.toString()) == 0)
+            throw OperandExceptions::ForbiddenMathsException();
+
+        long double newValue = std::fmod(std::stold(this->toString()), std::stold(rhs.toString()));
+
+        if (rhs.getPrecision() > this->getPrecision())
+            return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
+        else
+            return operandFactory.createOperand(getType(), std::to_string(newValue));
     }
 
 /* ******************************* */

@@ -44,7 +44,7 @@ IOperand const *OperandFactory::createInt8(std::string const &value) const {
     if (newValue > max)
         throw OperandExceptions::OverflowException();
 
-    return new Operand<char>(eOperandType::Int8, std::to_string(newValue), min, max);
+    return new Operand<char>(eOperandType::Int8, std::to_string(static_cast<char>(newValue)), min, max);
 }
 
 IOperand const *OperandFactory::createInt16(std::string const &value) const {
@@ -57,7 +57,7 @@ IOperand const *OperandFactory::createInt16(std::string const &value) const {
     if (newValue > max)
         throw OperandExceptions::OverflowException();
 
-    return new Operand<short>(eOperandType::Int16, std::to_string(newValue), min, max);
+    return new Operand<short>(eOperandType::Int16, std::to_string(static_cast<short>(newValue)), min, max);
 }
 
 IOperand const *OperandFactory::createInt32(std::string const &value) const {
@@ -70,35 +70,31 @@ IOperand const *OperandFactory::createInt32(std::string const &value) const {
     if (newValue > max)
         throw OperandExceptions::OverflowException();
 
-    return new Operand<int>(eOperandType::Int32, std::to_string(newValue), min, max);
+    return new Operand<int>(eOperandType::Int32, std::to_string(static_cast<int>(newValue)), min, max);
 }
 
 IOperand const *OperandFactory::createFloat(std::string const &value) const {
     long double newValue = std::stold(value);
-    long double min = std::numeric_limits<float>::min();
-    long double max = std::numeric_limits<float>::max();
+    float max = std::numeric_limits<float>::max();
 
-    if (newValue < min)
+    if (newValue < static_cast<long double>(-max))
         throw OperandExceptions::UnderflowException();
-    if (newValue > max)
+    if (newValue > static_cast<long double>(max))
         throw OperandExceptions::OverflowException();
 
-    return new Operand<float>(eOperandType::Float, std::to_string(newValue), static_cast<float>(min),
-                              static_cast<float>(max));
+    return new Operand<float>(eOperandType::Float, std::to_string(static_cast<float>(newValue)), -max, max);
 }
 
 IOperand const *OperandFactory::createDouble(std::string const &value) const {
     long double newValue = std::stold(value);
-    long double min = std::numeric_limits<double>::min();
-    long double max = std::numeric_limits<double>::max();
+    double max = std::numeric_limits<double>::max();
 
-    if (newValue < min)
+    if (newValue < static_cast<long double>(-max))
         throw OperandExceptions::UnderflowException();
-    if (newValue > max)
+    if (newValue > static_cast<long double>(max))
         throw OperandExceptions::OverflowException();
 
-    return new Operand<double>(eOperandType::Double, std::to_string(newValue), static_cast<double>(min),
-                               static_cast<double>(max));
+    return new Operand<double>(eOperandType::Double, std::to_string(static_cast<double>(newValue)), -max, max);
 }
 
 /* ******************************* */

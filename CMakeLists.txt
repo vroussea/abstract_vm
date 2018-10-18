@@ -13,7 +13,7 @@ set(testLexerCode tests/lexer/testCommentsLexer.cpp tests/lexer/testCommandsLexe
 
 set(testParserCode tests/parser/testPushAssertParser.cpp tests/parser/testSingleParameterCommandParser.cpp)
 
-set(testOperandCode tests/operand/testCreateOperand.cpp tests/operand/testAddOperand.cpp tests/operand/tesSubOperand.cpp)
+set(testOperandCode tests/operand/testCreateOperand.cpp tests/operand/testAddOperand.cpp tests/operand/testSubOperand.cpp tests/operand/testMulOperand.cpp tests/operand/testDivOperand.cpp tests/operand/testModOperand.cpp)
 
 set(testOperandFactoryCode tests/operandFactory/testNewCharOperand.cpp tests/operandFactory/testNewShortOperand.cpp tests/operandFactory/testNewIntOperand.cpp tests/operandFactory/testNewFloatOperand.cpp tests/operandFactory/testNewDoubleOperand.cpp)
 

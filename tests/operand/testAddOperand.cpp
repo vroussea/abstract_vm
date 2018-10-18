@@ -13,6 +13,15 @@ TEST_CASE("test add two chars") {
     REQUIRE(dynamic_cast<const Operand<char> *>(addResult)->toString() == std::to_string('a'));
 }
 
+TEST_CASE("test add two chars with exception") {
+    IOperand *char1 = new Operand<char>(eOperandType::Int8, "125", std::numeric_limits<char>::min(),
+                                        std::numeric_limits<char>::max());
+    IOperand *char2 = new Operand<char>(eOperandType::Int8, "125", std::numeric_limits<char>::min(),
+                                        std::numeric_limits<char>::max());
+
+    REQUIRE_THROWS_AS(*char1 + *char2, OperandExceptions::OverflowException);
+}
+
 TEST_CASE("test add short to char") {
     IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('A'), std::numeric_limits<char>::min(), std::numeric_limits<char>::max());
     IOperand *short1 = new Operand<short>(eOperandType::Int16, "1", std::numeric_limits<short>::min(), std::numeric_limits<short>::max());
@@ -20,6 +29,17 @@ TEST_CASE("test add short to char") {
     IOperand const *addResult = (*char1 + *short1);
 
     REQUIRE(dynamic_cast<const Operand<short> *>(addResult)->toString() == std::to_string('B'));
+}
+
+TEST_CASE("test add int to double") {
+    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.1", std::numeric_limits<double>::min(),
+                                            std::numeric_limits<double>::max());
+    IOperand *int1 = new Operand<int>(eOperandType::Int32, "1", std::numeric_limits<int>::min(),
+                                      std::numeric_limits<int>::max());
+
+    IOperand const *addResult = (*double1 + *int1);
+
+    REQUIRE(std::stof(dynamic_cast<const Operand<double> *>(addResult)->toString()) == 2.1f);
 }
 
 TEST_CASE("test add two shorts") {
