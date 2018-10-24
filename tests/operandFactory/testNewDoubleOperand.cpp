@@ -14,7 +14,7 @@ TEST_CASE("test new double overflow") {
 TEST_CASE("test new double underflow") {
     OperandFactory operandFactory;
 
-    long double min = std::numeric_limits<long double>::min();
+    long double min = -std::numeric_limits<long double>::max();
 
     REQUIRE_THROWS_AS(operandFactory.createOperand(eOperandType::Double, std::to_string(min)),
                       OperandExceptions::UnderflowException);
@@ -22,7 +22,6 @@ TEST_CASE("test new double underflow") {
 
 TEST_CASE("test new double works") {
     OperandFactory operandFactory;
-
 
     IOperand const *IOperand = operandFactory.createOperand(eOperandType::Double, "97.5");
 

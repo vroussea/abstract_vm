@@ -14,7 +14,7 @@ TEST_CASE("test new float overflow") {
 TEST_CASE("test new float underflow") {
     OperandFactory operandFactory;
 
-    long double min = std::numeric_limits<double>::min();
+    long double min = -std::numeric_limits<double>::max();
 
     REQUIRE_THROWS_AS(operandFactory.createOperand(eOperandType::Float, std::to_string(min)),
                       OperandExceptions::UnderflowException);
