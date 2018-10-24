@@ -1,5 +1,6 @@
 #include "../catch.hpp"
 #include "../../includes/Stack.hpp"
+#include "../../includes/exceptions/StackExceptions.hpp"
 
 TEST_CASE("test assert stack without error") {
     Stack stack;

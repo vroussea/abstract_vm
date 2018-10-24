@@ -1,5 +1,7 @@
 #include "../catch.hpp"
 #include "../../includes/Stack.hpp"
+#include "../../includes/exceptions/StackExceptions.hpp"
+#include "../../includes/exceptions/OperandExceptions.hpp"
 
 TEST_CASE("test add stack without error") {
     Stack stack;
