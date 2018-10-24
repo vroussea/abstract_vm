@@ -126,18 +126,3 @@ void Parser::parse(std::vector<std::string> list) {
 
 
 
-const char *Parser::PopOnEmptyStackException::what() const noexcept {
-    return "Pop on empty stack in this line";
-}
-
-const char *Parser::NoExitInstructionException::what() const noexcept {
-    return "No exit instructions in the commands";
-}
-
-const char *Parser::FalseAssertException::what() const noexcept {
-    return "False assertion in this line";
-}
-
-const char *Parser::TooFewValuesException::what() const noexcept {
-    return "Not enough values do to the operation in this line";
-}
