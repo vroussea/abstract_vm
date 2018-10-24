@@ -38,3 +38,7 @@ const char *LexerExceptions::LexicalErrorException::what() const noexcept {
 const char *LexerExceptions::UnknownIntructionException::what() const noexcept {
     return "Unknown instruction in this line";
 }
+
+const char *LexerExceptions::NoExitInstructionException::what() const noexcept {
+    return "No exit instructions in the commands";
+}

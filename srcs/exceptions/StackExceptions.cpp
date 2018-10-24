@@ -35,10 +35,6 @@ const char *StackExceptions::PopOnEmptyStackException::what() const noexcept {
     return "Pop on empty stack in this line";
 }
 
-const char *StackExceptions::NoExitInstructionException::what() const noexcept {
-    return "No exit instructions in the commands";
-}
-
 const char *StackExceptions::FalseAssertException::what() const noexcept {
     return "False assertion in this line";
 }

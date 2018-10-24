@@ -17,7 +17,7 @@ set(testOperandCode tests/operand/testCreateOperand.cpp tests/operand/testAddOpe
 
 set(testOperandFactoryCode tests/operandFactory/testNewCharOperand.cpp tests/operandFactory/testNewShortOperand.cpp tests/operandFactory/testNewIntOperand.cpp tests/operandFactory/testNewFloatOperand.cpp tests/operandFactory/testNewDoubleOperand.cpp)
 
-set(testStackCode tests/stack/testPopStack.cpp)
+set(testStackCode tests/stack/testPushStack.cpp tests/stack/testAssertStack.cpp tests/stack/testPopStack.cpp tests/stack/testOperationsStack.cpp tests/stack/testPrintStack.cpp)
 
 set(testMainCode tests/testCommands.cpp)
 

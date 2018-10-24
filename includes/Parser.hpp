@@ -15,11 +15,11 @@ public:
 
     typedef void (Parser::*ParserErrorMethodPointer)(std::string);
 
-    typedef void (Parser::*ParserMethodPointer)(std::string, Token commandToken);
+    typedef bool (Parser::*ParserMethodPointer)(std::string, Token commandToken);
 
-    typedef void (Stack::*ParamStackMethodPointer)(double value);
+    typedef bool (Stack::*ParamStackMethodPointer)(std::string const &value, eOperandType const &operandType);
 
-    typedef void (Stack::*SimpleStackMethodPointer)();
+    typedef bool (Stack::*SimpleStackMethodPointer)();
 
     Parser();
 
@@ -37,11 +37,12 @@ public:
 
     void withoutErrorMode(std::string);
 
-    void pushAssertCommand(std::string expression, Token commandToken);
+    bool pushAssertCommand(std::string expression, Token commandToken);
 
-    void littleCommand(std::string expression, Token commandToken);
+    bool littleCommand(std::string expression, Token commandToken);
 
 private:
+    Stack *stack;
     size_t lineNumber;
     Parser::ParserErrorMethodPointer errorModeMethods;
     std::array<Parser::ParserMethodPointer, 2> instructionMethods;

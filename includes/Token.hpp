@@ -18,7 +18,7 @@ public:
 
     explicit Token(int _tokkenType);
 
-    Token(int _tokkenType, double _value);
+    Token(int _tokkenType, std::string const &_value);
 
     Token(Token const &src);
 
@@ -30,9 +30,9 @@ public:
 
     void setTokenType(int tokkenType);
 
-    double getTokenValue() const;
+    std::string const &getTokenValue() const;
 
-    void setTokenValue(double tokkenValue);
+    void setTokenValue(std::string const &tokkenValue);
 
     int getCommandType() const;
 
@@ -49,7 +49,7 @@ private:
     int tokenType;
     int commandType;
     int valueType;
-    double tokenValue;
+    std::string tokenValue;
 };
 
 std::ostream &operator<<(std::ostream &o, Token const &i);

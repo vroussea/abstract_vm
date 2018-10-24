@@ -70,7 +70,9 @@ IOperand const *OperandFactory::createInt32(std::string const &value) const {
     if (newValue > max)
         throw OperandExceptions::OverflowException();
 
-    return new Operand<int>(eOperandType::Int32, std::to_string(static_cast<int>(newValue)), min, max);
+    IOperand const *test = new Operand<int>(eOperandType::Int32, std::to_string(static_cast<int>(newValue)), min, max);
+
+    return test;
 }
 
 IOperand const *OperandFactory::createFloat(std::string const &value) const {

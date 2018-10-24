@@ -25,6 +25,11 @@ public:
         const char *what() const noexcept override;
     };
 
+    class NoExitInstructionException : public std::exception {
+    public:
+        const char *what() const noexcept override;
+    };
+
 private:
 };
 

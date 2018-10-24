@@ -11,7 +11,7 @@ Token::Token(int _tokkenType) : tokenType(_tokkenType) {
 
 }
 
-Token::Token(int _tokkenType, double _value) : tokenType(_tokkenType), tokenValue(_value) {
+Token::Token(int _tokkenType, std::string const &_value) : tokenType(_tokkenType), tokenValue(_value) {
 
 }
 
@@ -82,12 +82,12 @@ void Token::setValueType(int valueType) {
     this->valueType = valueType;
 }
 
-double Token::getTokenValue() const {
+std::string const &Token::getTokenValue() const {
     return tokenValue;
 }
 
-void Token::setTokenValue(double tokkenValue) {
-    this->tokenValue = tokkenValue;
+void Token::setTokenValue(std::string const &tokenValue) {
+    this->tokenValue = tokenValue;
 }
 
 /* ******************************* */

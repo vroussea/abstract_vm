@@ -54,7 +54,7 @@ std::ostream &operator<<(std::ostream &o, Parser const &) {
 /*            Functions            */
 /* ******************************* */
 
-void Parser::pushAssertCommand(std::string expression, Token commandToken) {
+bool Parser::pushAssertCommand(std::string expression, Token commandToken) {
     try {
         Token typeToken = lexer.findType(expression);
         if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_OPENER)
@@ -64,7 +64,8 @@ void Parser::pushAssertCommand(std::string expression, Token commandToken) {
             throw LexerExceptions::LexicalErrorException();
         if (!expression.empty())
             throw LexerExceptions::LexicalErrorException();
-        paramStackMethods[commandToken.getTokenType()];
+        return (stack->*paramStackMethods[commandToken.getCommandType()])(valueToken.getTokenValue(),
+                                                                          static_cast<eOperandType>(typeToken.getValueType()));
     } catch (LexerExceptions::LexicalErrorException const &e) {
         throw e;
     } catch (std::exception const &e) {
@@ -72,11 +73,11 @@ void Parser::pushAssertCommand(std::string expression, Token commandToken) {
     }
 }
 
-void Parser::littleCommand(std::string expression, Token commandToken) {
+bool Parser::littleCommand(std::string expression, Token commandToken) {
     try {
         if (!expression.empty())
             throw LexerExceptions::LexicalErrorException();
-        littleStackMethods[commandToken.getTokenType()];
+        return (stack->*littleStackMethods[commandToken.getCommandType()])();
     } catch (LexerExceptions::LexicalErrorException const &e) {
         throw e;
     } catch (std::exception const &e) {
@@ -100,16 +101,24 @@ void Parser::withoutErrorMode(std::string whatHappened) {
 }
 
 void Parser::parse(std::vector<std::string> list) {
+    bool isExit = false;
     for (std::string const &line : list) {
         std::string expression = line;
         lexer.findComment(expression);
         try {
             Token commandToken = this->lexer.findCommand(expression);
-            (this->*instructionMethods[commandToken.getCommandType()])(expression, commandToken);
+            if ((this->*instructionMethods[commandToken.getCommandType() > 1 ? 1 : 0])(expression, commandToken)) {
+                isExit = true;
+                break;
+            }
         } catch (std::exception const &e) {
             (this->*errorModeMethods)(e.what());
         }
         lineNumber++;
+    }
+    if (!isExit) {
+        LexerExceptions::NoExitInstructionException noExitInstructionException;
+        (this->*errorModeMethods)(noExitInstructionException.what());
     }
     if (!this->allErrors.empty())
         for (std::string const &error : this->allErrors)

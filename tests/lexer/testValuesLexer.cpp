@@ -19,7 +19,7 @@ TEST_CASE("test int value") {
 
     Token token = lexer.findValue(expression);
 
-    REQUIRE(token.getTokenValue() == 5);
+    REQUIRE(token.getTokenValue() == "5");
 }
 
 TEST_CASE("test float value") {
@@ -29,7 +29,7 @@ TEST_CASE("test float value") {
 
     Token token = lexer.findValue(expression);
 
-    REQUIRE(token.getTokenValue() == 5.5);
+    REQUIRE(token.getTokenValue() == "5.5");
 }
 
 TEST_CASE("test start with . exception") {
@@ -47,7 +47,7 @@ TEST_CASE("test 2 points exception") {
 
     Token token = lexer.findValue(expression);
 
-    REQUIRE(token.getTokenValue() == 0);
+    REQUIRE(token.getTokenValue() == "0");
 }
 
 TEST_CASE("test not a value exception") {

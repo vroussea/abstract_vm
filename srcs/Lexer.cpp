@@ -105,7 +105,7 @@ Token Lexer::findValue(std::string &expression) {
         size_t pos = expression.find(value);
         expression.erase(pos, value.length());
         Token token(Token::VALUE);
-        token.setTokenValue(std::stod(value));
+        token.setTokenValue(value);
         return token;
     }
     throw LexerExceptions::LexicalErrorException();

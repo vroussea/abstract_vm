@@ -2,8 +2,9 @@
 #ifndef ABSTRACT_VM_STACK_HPP
 #define ABSTRACT_VM_STACK_HPP
 
-
 #include <iostream>
+#include <stack>
+#include "IOperand.hpp"
 
 class Stack {
 public:
@@ -15,29 +16,33 @@ public:
 
     Stack &operator=(Stack const &) = default;
 
-    void push(double value);
+    bool push(std::string const &value, eOperandType const &operandType);
 
-    void assert(double value);
+    bool assert(std::string const &value, eOperandType const &);
 
-    void pop();
+    bool pop();
 
-    void dump();
+    bool dump();
 
-    void add();
+    bool add();
 
-    void sub();
+    bool sub();
 
-    void mul();
+    bool mul();
 
-    void div();
+    bool div();
 
-    void mod();
+    bool mod();
 
-    void print();
+    bool print();
 
-    void exit();
+    bool exit();
 
 private:
+
+    void pushStack(IOperand const *newOperand);
+
+    std::stack<IOperand const *> operandStack;
 };
 
 std::ostream &operator<<(std::ostream &o, Stack const &i);
