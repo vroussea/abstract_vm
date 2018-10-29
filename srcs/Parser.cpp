@@ -24,13 +24,17 @@ Parser::Parser() {
     this->littleStackMethods.at(8) = &Stack::mod;
     this->littleStackMethods.at(9) = &Stack::print;
     this->littleStackMethods.at(10) = &Stack::exit;
+
+    stack = new Stack();
 }
 
 Parser::Parser(Parser const &src) {
     *this = src;
 }
 
-Parser::~Parser() = default;
+Parser::~Parser() {
+    delete (stack);
+}
 
 /* ******************************* */
 /*       operators  overload       */

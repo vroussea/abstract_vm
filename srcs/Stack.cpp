@@ -46,6 +46,9 @@ bool Stack::assert(std::string const &value, eOperandType const &) {
 bool Stack::pop() {
     if (this->operandStack.empty())
         throw StackExceptions::PopOnEmptyStackException();
+    IOperand const *toPop = this->operandStack.top();
+    this->operandStack.pop();
+    delete (toPop);
     return false;
 
 }
@@ -74,6 +77,8 @@ bool Stack::add() {
     this->operandStack.pop();
 
     pushStack(*left + *right);
+    delete (right);
+    delete (left);
     return false;
 
 }
@@ -91,6 +96,8 @@ bool Stack::sub() {
     this->operandStack.pop();
 
     pushStack(*left - *right);
+    delete (right);
+    delete (left);
     return false;
 
 }
@@ -108,6 +115,8 @@ bool Stack::mul() {
     this->operandStack.pop();
 
     pushStack(*left * *right);
+    delete (right);
+    delete (left);
     return false;
 
 }
@@ -125,6 +134,8 @@ bool Stack::div() {
     this->operandStack.pop();
 
     pushStack(*left / *right);
+    delete (right);
+    delete (left);
     return false;
 
 }
@@ -142,6 +153,8 @@ bool Stack::mod() {
     this->operandStack.pop();
 
     pushStack(*left % *right);
+    delete (right);
+    delete (left);
     return false;
 
 }

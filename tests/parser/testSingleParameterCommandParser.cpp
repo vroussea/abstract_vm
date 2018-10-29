@@ -5,7 +5,9 @@
 TEST_CASE("test pop ok") {
     Parser parser;
 
-    Token token(Token::ADD);
+    Token token(Token::COMMAND);
+
+    token.setCommandType(Token::CommandType::EXIT);
 
     REQUIRE_NOTHROW(parser.littleCommand("", token));
 }
@@ -15,7 +17,9 @@ TEST_CASE("test pop with something at the end") {
 
     std::string expression = ";comment";
 
-    Token token(Token::ADD);
+    Token token(Token::COMMAND);
+
+    token.setCommandType(Token::CommandType::EXIT);
 
     REQUIRE_THROWS_AS(parser.littleCommand(expression, token), LexerExceptions::LexicalErrorException);
 }

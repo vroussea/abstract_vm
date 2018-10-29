@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <stack>
+#include <memory>
 #include "IOperand.hpp"
 
 class Stack {
@@ -42,7 +43,8 @@ private:
 
     void pushStack(IOperand const *newOperand);
 
-    std::stack<IOperand const *> operandStack;
+    std::stack<IOperand const *> operandStack{};
+
 };
 
 std::ostream &operator<<(std::ostream &o, Stack const &i);

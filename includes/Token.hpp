@@ -16,7 +16,7 @@ public:
         PUSH, ASSERT, POP, DUMP, ADD, SUB, MUL, DIV, MOD, PRINT, EXIT
     } CommandType;
 
-    explicit Token(int _tokkenType);
+    explicit Token(TokenType _tokkenType);
 
     Token(int _tokkenType, std::string const &_value);
 

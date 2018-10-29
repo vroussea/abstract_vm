@@ -7,7 +7,7 @@
 
 Token::Token() = default;
 
-Token::Token(int _tokkenType) : tokenType(_tokkenType) {
+Token::Token(TokenType _tokkenType) : tokenType(_tokkenType) {
 
 }
 

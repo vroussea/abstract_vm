@@ -1,6 +1,5 @@
 #include <iostream>
 #include "../includes/Commands.hpp"
-#include "../includes/Lexer.hpp"
 #include "../includes/Parser.hpp"
 
 int main(int argc, char **argv) {

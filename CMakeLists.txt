@@ -19,7 +19,7 @@ set(testOperandFactoryCode tests/operandFactory/testNewCharOperand.cpp tests/ope
 
 set(testStackCode tests/stack/testPushStack.cpp tests/stack/testAssertStack.cpp tests/stack/testPopStack.cpp tests/stack/testOperationsStack.cpp tests/stack/testPrintStack.cpp)
 
-set(testMainCode tests/testCommands.cpp)
+set(testMainCode tests/testMain.cpp)
 
 set(HEADER_FILES includes/Commands.hpp includes/Lexer.hpp includes/Parser.hpp includes/Token.hpp includes/Stack.hpp includes/IOperand.hpp includes/eOperandType.hpp includes/OperandFactory.hpp)
 
