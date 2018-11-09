@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror")
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp srcs/Stack.cpp includes/Operand.hpp srcs/OperandFactory.cpp)
+set(sourceCode srcs/Commands.cpp srcs/Lexer.cpp srcs/Parser.cpp srcs/Token.cpp srcs/Stack.cpp srcs/Operand.cpp srcs/OperandFactory.cpp)
 
 set(exceptionSourceCode srcs/exceptions/OperandExceptions.cpp srcs/exceptions/LexerExceptions.cpp srcs/exceptions/StackExceptions.cpp)
 

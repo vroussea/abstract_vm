@@ -1,0 +1,11 @@
+push int32(0);yes
+push int32(-1);yes
+push int32(1);yes
+push int32(4.4);yes
+push int32(-2147483648);yes
+push int32(-2147483649);yes
+push int32(2147483646);yes
+push int32(2147483648);yes
+
+dump
+exit

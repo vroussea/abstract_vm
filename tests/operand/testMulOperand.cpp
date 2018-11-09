@@ -1,14 +1,12 @@
 #include "../catch.hpp"
 
 #include "../../includes/eOperandType.hpp"
-#include "../../includes/Operand.hpp"
+#include "../../srcs/Operand.cpp"
 
 
 TEST_CASE("test mul two chars") {
-    IOperand *char1 = new Operand<char>(eOperandType::Int8, "10", std::numeric_limits<char>::min(),
-                                        std::numeric_limits<char>::max());
-    IOperand *char2 = new Operand<char>(eOperandType::Int8, "11", std::numeric_limits<char>::min(),
-                                        std::numeric_limits<char>::max());
+    IOperand *char1 = new Operand<char>(eOperandType::Int8, "10");
+    IOperand *char2 = new Operand<char>(eOperandType::Int8, "11");
 
     IOperand const *mulResult = (*char1 * *char2);
 
@@ -16,10 +14,8 @@ TEST_CASE("test mul two chars") {
 }
 
 TEST_CASE("test mul short to char") {
-    IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('A'), std::numeric_limits<char>::min(),
-                                        std::numeric_limits<char>::max());
-    IOperand *short1 = new Operand<short>(eOperandType::Int16, "1", std::numeric_limits<short>::min(),
-                                          std::numeric_limits<short>::max());
+    IOperand *char1 = new Operand<char>(eOperandType::Int8, std::to_string('A'));
+    IOperand *short1 = new Operand<short>(eOperandType::Int16, "1");
 
     IOperand const *mulResult = (*char1 * *short1);
 
@@ -27,10 +23,8 @@ TEST_CASE("test mul short to char") {
 }
 
 TEST_CASE("test mul int to double") {
-    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.1", std::numeric_limits<double>::min(),
-                                            std::numeric_limits<double>::max());
-    IOperand *int1 = new Operand<int>(eOperandType::Int32, "1", std::numeric_limits<int>::min(),
-                                      std::numeric_limits<int>::max());
+    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.1");
+    IOperand *int1 = new Operand<int>(eOperandType::Int32, "1");
 
     IOperand const *mulResult = (*double1 * *int1);
 
@@ -38,10 +32,8 @@ TEST_CASE("test mul int to double") {
 }
 
 TEST_CASE("test mul two shorts") {
-    IOperand *short1 = new Operand<short>(eOperandType::Int16, "10", std::numeric_limits<short>::min(),
-                                          std::numeric_limits<short>::max());
-    IOperand *short2 = new Operand<short>(eOperandType::Int16, "5", std::numeric_limits<short>::min(),
-                                          std::numeric_limits<short>::max());
+    IOperand *short1 = new Operand<short>(eOperandType::Int16, "10");
+    IOperand *short2 = new Operand<short>(eOperandType::Int16, "5");
 
     IOperand const *mulResult = (*short1 * *short2);
 
@@ -49,21 +41,17 @@ TEST_CASE("test mul two shorts") {
 }
 
 TEST_CASE("test mul two ints") {
-    IOperand *int1 = new Operand<int>(eOperandType::Int32, "2000000000", std::numeric_limits<int>::min(),
-                                      std::numeric_limits<int>::max());
-    IOperand *int2 = new Operand<int>(eOperandType::Int32, "1", std::numeric_limits<int>::min(),
-                                      std::numeric_limits<int>::max());
+    IOperand *int1 = new Operand<int>(eOperandType::Int32, "2000000000");
+    IOperand *int2 = new Operand<int>(eOperandType::Int32, "1");
 
     IOperand const *mulResult = (*int1 * *int2);
 
-    REQUIRE(dynamic_cast<const Operand<int> *>(mulResult)->toString() == "2000000000");
+    REQUIRE(std::stol(dynamic_cast<const Operand<int> *>(mulResult)->toString()) == 2000000000);
 }
 
 TEST_CASE("test mul two floats") {
-    IOperand *float1 = new Operand<float>(eOperandType::Float, "1.5f", std::numeric_limits<float>::min(),
-                                          std::numeric_limits<float>::max());
-    IOperand *float2 = new Operand<float>(eOperandType::Float, "3.1", std::numeric_limits<float>::min(),
-                                          std::numeric_limits<float>::max());
+    IOperand *float1 = new Operand<float>(eOperandType::Float, "1.5f");
+    IOperand *float2 = new Operand<float>(eOperandType::Float, "3.1");
 
     IOperand const *mulResult = (*float1 * *float2);
 
@@ -71,10 +59,8 @@ TEST_CASE("test mul two floats") {
 }
 
 TEST_CASE("test mul two doubles") {
-    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.5", std::numeric_limits<double>::min(),
-                                            std::numeric_limits<double>::max());
-    IOperand *double2 = new Operand<double>(eOperandType::Double, "0",
-                                            std::numeric_limits<double>::min(), std::numeric_limits<double>::max());
+    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.5");
+    IOperand *double2 = new Operand<double>(eOperandType::Double, "0");
 
     OperandFactory operandFactory;
 

@@ -1,6 +1,6 @@
 #include "../catch.hpp"
 #include "../../includes/OperandFactory.hpp"
-#include "../../includes/Operand.hpp"
+#include "../../srcs/Operand.cpp"
 
 TEST_CASE("test new short overflow") {
     OperandFactory operandFactory;
@@ -26,7 +26,7 @@ TEST_CASE("test new short works") {
     OperandFactory operandFactory;
 
 
-    IOperand const *IOperand = operandFactory.createOperand(eOperandType::Int16, "97.5");
+    IOperand const *IOperand = operandFactory.createOperand(eOperandType::Int16, "97");
 
     REQUIRE(dynamic_cast<Operand<short> const *>(IOperand)->toString() == "97");
 

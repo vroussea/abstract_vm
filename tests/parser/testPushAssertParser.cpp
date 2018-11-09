@@ -14,6 +14,7 @@ TEST_CASE("test push ok") {
     REQUIRE_NOTHROW(parser.pushAssertCommand(expression, token));
 }
 
+/*
 TEST_CASE("test push with wrong type") {
     Parser parser;
 
@@ -108,4 +109,4 @@ TEST_CASE("test push with something at the end") {
     token.setCommandType(Token::CommandType::PUSH);
 
     REQUIRE_THROWS_AS(parser.pushAssertCommand(expression, token), LexerExceptions::LexicalErrorException);
-}
+}*/

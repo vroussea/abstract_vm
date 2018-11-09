@@ -1,0 +1,11 @@
+push int16(0);yes
+push int16(-1);yes
+push int16(1);yes
+push int16(4.4);yes
+push int16(-32768);yes
+push int16(-32769);yes
+push int16(32767);yes
+push int16(32768);yes
+
+dump
+exit

@@ -31,6 +31,10 @@ std::ostream &operator<<(std::ostream &o, OperandExceptions const &) {
 /*            Exceptions           */
 /* ******************************* */
 
+const char *OperandExceptions::NotAnIntegerException::what() const noexcept {
+    return "Trying to push floating value in integer variable";
+}
+
 const char *OperandExceptions::OverflowException::what() const noexcept {
     return "Overflow in this line";
 }
@@ -40,5 +44,5 @@ const char *OperandExceptions::UnderflowException::what() const noexcept {
 }
 
 const char *OperandExceptions::ForbiddenMathsException::what() const noexcept {
-    return "Division/modulo by 0 in this line";
+    return "Division/modulo by 0 or floating number modulo in this line";
 }

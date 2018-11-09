@@ -57,7 +57,11 @@ bool Stack::dump() {
     std::stack<IOperand const *> copyStack = this->operandStack;
 
     while (!copyStack.empty()) {
-        std::cout << copyStack.top()->toString() << std::endl;
+        std::string stringValue = copyStack.top()->toString();
+        if (stringValue.size() > 1)
+            stringValue.erase(stringValue.find_last_not_of('0') + 1, std::string::npos);
+        stringValue.erase(stringValue.find_last_not_of('.') + 1, std::string::npos);
+        std::cout << stringValue << std::endl;
         copyStack.pop();
     }
     return false;
@@ -168,7 +172,7 @@ bool Stack::print() {
     if (value->getType() != eOperandType::Int8)
         throw StackExceptions::FalseAssertException();
 
-    std::cout << static_cast<char>(std::stoi(value->toString()));
+    std::cout << static_cast<char>(std::stoi(value->toString())) << std::endl;
     return false;
 
 }

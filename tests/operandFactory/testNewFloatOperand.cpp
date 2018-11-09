@@ -1,6 +1,6 @@
 #include "../catch.hpp"
 #include "../../includes/OperandFactory.hpp"
-#include "../../includes/Operand.hpp"
+#include "../../srcs/Operand.cpp"
 
 TEST_CASE("test new float overflow") {
     OperandFactory operandFactory;

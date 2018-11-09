@@ -4,10 +4,20 @@ dump
 add
 dump
 pop
-dump
 push int8(97)
+dump
 print
 push double(32.0)
 sub
+dump
+push double(0.001)
+add
+dump
 print
+push double(0);lul
+dump
+div
+dump
+push int32(9)
+dump
 exit

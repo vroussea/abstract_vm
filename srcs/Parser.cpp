@@ -1,5 +1,7 @@
 
 #include "../includes/Parser.hpp"
+#include "../includes/exceptions/StackExceptions.hpp"
+#include "../includes/exceptions/OperandExceptions.hpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
@@ -70,11 +72,25 @@ bool Parser::pushAssertCommand(std::string expression, Token commandToken) {
             throw LexerExceptions::LexicalErrorException();
         return (stack->*paramStackMethods[commandToken.getCommandType()])(valueToken.getTokenValue(),
                                                                           static_cast<eOperandType>(typeToken.getValueType()));
-    } catch (LexerExceptions::LexicalErrorException const &e) {
-        throw e;
-    } catch (std::exception const &e) {
+    } catch (OperandExceptions::NotAnIntegerException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (LexerExceptions::LexicalErrorException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (OperandExceptions::UnderflowException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (OperandExceptions::OverflowException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (std::out_of_range const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (std::exception const &e) {
         throw e;
     }
+    return false;
 }
 
 bool Parser::littleCommand(std::string expression, Token commandToken) {
@@ -83,10 +99,21 @@ bool Parser::littleCommand(std::string expression, Token commandToken) {
             throw LexerExceptions::LexicalErrorException();
         return (stack->*littleStackMethods[commandToken.getCommandType()])();
     } catch (LexerExceptions::LexicalErrorException const &e) {
-        throw e;
-    } catch (std::exception const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (StackExceptions::FalseAssertException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (StackExceptions::TooFewValuesException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (OperandExceptions::ForbiddenMathsException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
+    catch (std::exception const &e) {
         throw e;
     }
+    return false;
 }
 
 void Parser::setErrorMode() {
@@ -109,16 +136,21 @@ void Parser::parse(std::vector<std::string> list) {
     for (std::string const &line : list) {
         std::string expression = line;
         lexer.findComment(expression);
-        try {
-            Token commandToken = this->lexer.findCommand(expression);
-            if ((this->*instructionMethods[commandToken.getCommandType() > 1 ? 1 : 0])(expression, commandToken)) {
-                isExit = true;
-                break;
+        if (!expression.empty()) {
+            try {
+                Token commandToken = this->lexer.findCommand(expression);
+                if ((this->*instructionMethods[commandToken.getCommandType() > 1 ? 1 : 0])(expression, commandToken)) {
+                    isExit = true;
+                    break;
+                }
+            } catch (LexerExceptions::UnknownIntructionException const &e) {
+                (this->*errorModeMethods)(e.what());
             }
-        } catch (std::exception const &e) {
-            (this->*errorModeMethods)(e.what());
+            catch (std::exception const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            lineNumber++;
         }
-        lineNumber++;
     }
     if (!isExit) {
         LexerExceptions::NoExitInstructionException noExitInstructionException;

@@ -100,7 +100,7 @@ Token Lexer::findType(std::string &expression) {
 Token Lexer::findValue(std::string &expression) {
     std::smatch smatch;
 
-    if (std::regex_search(expression, smatch, std::regex("^[0-9]+(.[0-9]+)?"))) {
+    if (std::regex_search(expression, smatch, std::regex("^-?[0-9]+(.[0-9]+)?"))) {
         std::string value = smatch[0];
         size_t pos = expression.find(value);
         expression.erase(pos, value.length());

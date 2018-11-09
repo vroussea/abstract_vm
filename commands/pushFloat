@@ -1,0 +1,13 @@
+push float(0);yes
+push float(-1);yes
+push float(1);yes
+push float(4.4);yes
+push float(0.0);yes
+push float(-4.4);yes
+push float(-128);yes
+push float(-1245484848478484794564564545454545454544545);yes
+push float(127);yes
+push float(1454845844545454454524546899998787978979);yes
+
+dump
+exit

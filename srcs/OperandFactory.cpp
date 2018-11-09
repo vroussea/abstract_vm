@@ -2,7 +2,7 @@
 #include <limits>
 #include "../includes/OperandFactory.hpp"
 #include "../includes/exceptions/OperandExceptions.hpp"
-#include "../includes/Operand.hpp"
+#include "Operand.cpp"
 
 /* ******************************* */
 /*    Constructors & destructor    */
@@ -36,67 +36,71 @@ IOperand const *OperandFactory::createOperand(eOperandType type, std::string con
 
 IOperand const *OperandFactory::createInt8(std::string const &value) const {
     long long newValue = std::stoll(value);
-    char min = std::numeric_limits<char>::min();
-    char max = std::numeric_limits<char>::max();
 
-    if (newValue < min)
+    if (std::stold(value) - newValue != 0)
+        throw OperandExceptions::NotAnIntegerException();
+
+    if (newValue < std::numeric_limits<char>::min())
         throw OperandExceptions::UnderflowException();
-    if (newValue > max)
+    if (newValue > std::numeric_limits<char>::max())
         throw OperandExceptions::OverflowException();
 
-    return new Operand<char>(eOperandType::Int8, std::to_string(static_cast<char>(newValue)), min, max);
+    return new Operand<char>(eOperandType::Int8, std::to_string(static_cast<char>(newValue)));
 }
 
 IOperand const *OperandFactory::createInt16(std::string const &value) const {
     long long newValue = std::stoll(value);
-    short min = std::numeric_limits<short>::min();
-    short max = std::numeric_limits<short>::max();
 
-    if (newValue < min)
+    if (std::stold(value) - newValue != 0)
+        throw OperandExceptions::NotAnIntegerException();
+
+    if (newValue < std::numeric_limits<short>::min())
         throw OperandExceptions::UnderflowException();
-    if (newValue > max)
+    if (newValue > std::numeric_limits<short>::max())
         throw OperandExceptions::OverflowException();
 
-    return new Operand<short>(eOperandType::Int16, std::to_string(static_cast<short>(newValue)), min, max);
+    return new Operand<short>(eOperandType::Int16, std::to_string(static_cast<short>(newValue)));
 }
 
 IOperand const *OperandFactory::createInt32(std::string const &value) const {
-    long long newValue = std::stoll(value);
-    int min = std::numeric_limits<int>::min();
-    int max = std::numeric_limits<int>::max();
+    try {
+        int newValue = std::stoi(value);
+        if (std::stold(value) - newValue != 0)
+            throw OperandExceptions::NotAnIntegerException();
+    } catch (std::out_of_range const &e) {
+        if (value.at(0) == '-')
+            throw OperandExceptions::UnderflowException();
+        else
+            throw OperandExceptions::OverflowException();
+    }
 
-    if (newValue < min)
-        throw OperandExceptions::UnderflowException();
-    if (newValue > max)
-        throw OperandExceptions::OverflowException();
-
-    IOperand const *test = new Operand<int>(eOperandType::Int32, std::to_string(static_cast<int>(newValue)), min, max);
-
-    return test;
+    return new Operand<int>(eOperandType::Int32, value);
 }
 
 IOperand const *OperandFactory::createFloat(std::string const &value) const {
-    long double newValue = std::stold(value);
-    float max = std::numeric_limits<float>::max();
+    try {
+        std::stof(value);
+    } catch (std::out_of_range const &e) {
+        if (value.at(0) == '-')
+            throw OperandExceptions::UnderflowException();
+        else
+            throw OperandExceptions::OverflowException();
+    }
 
-    if (newValue < static_cast<long double>(-max))
-        throw OperandExceptions::UnderflowException();
-    if (newValue > static_cast<long double>(max))
-        throw OperandExceptions::OverflowException();
-
-    return new Operand<float>(eOperandType::Float, std::to_string(static_cast<float>(newValue)), -max, max);
+    return new Operand<float>(eOperandType::Float, value);
 }
 
 IOperand const *OperandFactory::createDouble(std::string const &value) const {
-    long double newValue = std::stold(value);
-    double max = std::numeric_limits<double>::max();
+    try {
+        std::stod(value);
+    } catch (std::out_of_range const &e) {
+        if (value.at(0) == '-')
+            throw OperandExceptions::UnderflowException();
+        else
+            throw OperandExceptions::OverflowException();
+    }
 
-    if (newValue < static_cast<long double>(-max))
-        throw OperandExceptions::UnderflowException();
-    if (newValue > static_cast<long double>(max))
-        throw OperandExceptions::OverflowException();
-
-    return new Operand<double>(eOperandType::Double, std::to_string(static_cast<double>(newValue)), -max, max);
+    return new Operand<double>(eOperandType::Double, value);
 }
 
 /* ******************************* */

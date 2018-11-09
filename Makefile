@@ -40,14 +40,14 @@ LIB_A =
 
 # dir
 SRC_DIR =	srcs
-TESTS_DIR = tests
 OBJ_DIR =	objs
+OBJ_EXCEPTIONS_DIR =	objs/exceptions
 INC_DIR =	includes
 
 # sources
 MAIN_NAME = main.cpp
-SRC_NAME =	Commands.cpp Lexer.cpp Parser.cpp
-TESTS_NAME =testCommands.cpp testLexer.cpp
+SRC_NAME =	Commands.cpp Lexer.cpp Parser.cpp Token.cpp Stack.cpp Operand.cpp OperandFactory.cpp \
+            exceptions/OperandExceptions.cpp exceptions/LexerExceptions.cpp exceptions/StackExceptions.cpp
 
 # objects
 OBJ_NAME =		$(SRC_NAME:.cpp=.o)
@@ -56,7 +56,6 @@ OBJ_MAIN_NAME =		$(MAIN_NAME:.cpp=.o)
 #paths
 SRC =		$(addprefix $(SRC_DIR)/, $(SRC_NAME))
 MAIN =		$(addprefix $(SRC_DIR)/, $(MAIN_NAME))
-TESTS =		$(addprefix $(TESTS_DIR)/, $(TESTS_NAME))
 OBJ =		$(addprefix $(OBJ_DIR)/, $(OBJ_NAME))
 OBJ_MAIN =	$(addprefix $(OBJ_DIR)/, $(OBJ_MAIN_NAME))
 INC =		$(addprefix -I, $(INC_DIR))
@@ -64,15 +63,12 @@ INC =		$(addprefix -I, $(INC_DIR))
 all :		$(EXE)
 $(EXE) :	$(SRC) $(OBJ) $(OBJ_MAIN)
 		@$(CC) $(OBJ) $(OBJ_MAIN) -o $@
-		@echo "$(CLEAR)$(LIG)$(BLUE)  Compiling "$()"$(CLEAR)$(LIG)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+		@echo "$(CLEAR)$(LIG)$(BLUE) Compiling "$<"$(CLEAR)$(LIG)"
 		@mkdir -p $(OBJ_DIR) 2> /dev/null || true
+		@mkdir -p $(OBJ_EXCEPTIONS_DIR) 2> /dev/null || true
 		@$(CC) $(CFLAGS) $(CPPVERSION) $(INC) -o $@ -c $<
-
-tests :
-		$(CC) $(CFLAGS) $(CPPVERSION) $(INC) $(TESTS) $(SRC) -o test
-		./test ; rm test
 
 meteo :
 		@curl http://wttr.in/Paris
@@ -80,6 +76,7 @@ meteo :
 clean :
 		@echo "$(CLEAR)$(TRA)$(RED)  Cleaning Object $(CLEAR)$(TRA)"
 		@$(RM) $(OBJ) $(OBJ_MAIN)
+		@rmdir $(OBJ_EXCEPTIONS_DIR) 2> /dev/null || true
 		@rmdir $(OBJ_DIR) 2> /dev/null || true
 
 fclean :	clean

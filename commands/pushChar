@@ -1,0 +1,11 @@
+push int8(0);yes
+push int8(-1);yes
+push int8(1);yes
+push int8(4.4);yes
+push int8(-128);yes
+push int8(-129);yes
+push int8(127);yes
+push int8(128);yes
+
+dump
+exit

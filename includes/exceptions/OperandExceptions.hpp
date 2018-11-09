@@ -15,6 +15,11 @@ public:
 
     OperandExceptions &operator=(OperandExceptions const &) = default;
 
+    class NotAnIntegerException : public std::exception {
+    public:
+        const char *what() const noexcept override;
+    };
+
     class OverflowException : public std::exception {
     public:
         const char *what() const noexcept override;

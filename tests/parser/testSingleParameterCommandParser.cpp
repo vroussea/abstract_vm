@@ -12,6 +12,7 @@ TEST_CASE("test pop ok") {
     REQUIRE_NOTHROW(parser.littleCommand("", token));
 }
 
+/*
 TEST_CASE("test pop with something at the end") {
     Parser parser;
 
@@ -22,4 +23,4 @@ TEST_CASE("test pop with something at the end") {
     token.setCommandType(Token::CommandType::EXIT);
 
     REQUIRE_THROWS_AS(parser.littleCommand(expression, token), LexerExceptions::LexicalErrorException);
-}
+}*/

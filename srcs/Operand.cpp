@@ -2,9 +2,9 @@
 #ifndef ABSTRACT_VM_OPERAND_TPP
 #define ABSTRACT_VM_OPERAND_TPP
 
-#include "IOperand.hpp"
-#include "OperandFactory.hpp"
-#include "exceptions/OperandExceptions.hpp"
+#include "../includes/IOperand.hpp"
+#include "../includes/OperandFactory.hpp"
+#include "../includes/exceptions/OperandExceptions.hpp"
 
 #include <sstream>
 #include <cmath>
@@ -16,17 +16,15 @@ public:
 /*    Constructors & destructor    */
 /* ******************************* */
 
-    Operand(eOperandType _type, std::string _value, T _min, T _max)
-            : type(_type), precision(static_cast<int>(_type)), value(std::move(_value)), min(_min), max(_max) {
+    Operand(eOperandType _type, std::string _value)
+            : type(_type), precision(static_cast<int>(_type)), value(std::move(_value)) {
     }
 
     Operand(Operand const &src) {
         *this = src;
     }
 
-    ~Operand() {
-
-    }
+    ~Operand() = default;
 
 /* ******************************* */
 /*       operators  overload       */
@@ -37,8 +35,6 @@ public:
             this->precision = rhs.getPrecision();
             this->value = rhs.toString();
             this->type = rhs.getType();
-            this->min = getMin();
-            this->max = getMax();
         }
 
         return *this;
@@ -80,7 +76,7 @@ public:
         if (std::stold(rhs.toString()) == 0)
             throw OperandExceptions::ForbiddenMathsException();
 
-        long double newValue = std::stold(this->toString()) / std::stold(rhs.toString());
+        T newValue = std::stold(this->toString()) / std::stold(rhs.toString());
 
         if (rhs.getPrecision() > this->getPrecision())
             return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
@@ -89,10 +85,10 @@ public:
     }
 
     IOperand const *operator%(IOperand const &rhs) const override {
-        if (std::stold(rhs.toString()) == 0)
+        if (std::stold(rhs.toString()) == 0 || this->getPrecision() > 2 || rhs.getPrecision() > 2)
             throw OperandExceptions::ForbiddenMathsException();
 
-        long double newValue = std::fmod(std::stold(this->toString()), std::stold(rhs.toString()));
+        T newValue = std::stol(this->toString()) % std::stol(rhs.toString());
 
         if (rhs.getPrecision() > this->getPrecision())
             return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
@@ -104,26 +100,17 @@ public:
 /*            Accessors            */
 /* ******************************* */
 
-    int getPrecision(void) const override {
+    int getPrecision() const override {
         return this->precision;
     }
 
-    eOperandType getType(void) const override {
+    eOperandType getType() const override {
         return this->type;
     }
 
-    std::string const &toString(void) const override {
+    std::string const &toString() const override {
         return this->value;
     }
-
-    const T getMin() const {
-        return min;
-    }
-
-    const T getMax() const {
-        return max;
-    }
-
 
 /* ******************************* */
 /*            Exceptions           */
@@ -134,8 +121,6 @@ private:
     eOperandType type;
     int precision;
     std::string value;
-    T min;
-    T max;
 };
 
 #endif
