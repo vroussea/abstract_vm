@@ -1,0 +1,13 @@
+push int8(97)
+print
+dump
+pop
+print
+dump
+push int16(97)
+print
+dump
+pop
+dump
+print
+exit

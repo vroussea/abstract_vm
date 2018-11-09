@@ -40,5 +40,5 @@ const char *StackExceptions::FalseAssertException::what() const noexcept {
 }
 
 const char *StackExceptions::TooFewValuesException::what() const noexcept {
-    return "Not enough values do to the operation in this line";
+    return "Not enough values to do the operation in this line";
 }

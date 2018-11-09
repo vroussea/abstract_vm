@@ -9,11 +9,11 @@ int main(int argc, char **argv) {
     if (argc > 3 || (argc == 3 && strncmp(argv[1], "-e", 2) != 0)) {
         std::cout << "Error with arguments" << std::endl;
         return 1;
-    } else if (argc == 3 && strncmp(argv[1], "-e", 2) == 0) {
+    } else if ((argc == 3 && strncmp(argv[1], "-e", 2) == 0) || (argc == 2 && strncmp(argv[1], "-e", 2) == 0)) {
         parser.setErrorMode();
     }
     try {
-        if (argc == 1)
+        if (argc == 1 || (argc == 2 && strncmp(argv[1], "-e", 2) == 0))
             commands.setCommands();
         else if (argc >= 2)
             commands.setCommands(argv[argc - 1]);

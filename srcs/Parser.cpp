@@ -8,7 +8,7 @@
 /* ******************************* */
 
 Parser::Parser() {
-    this->lineNumber = 1;
+    this->lineNumber = 0;
 
     this->errorModeMethods = &Parser::withoutErrorMode;
     this->instructionMethods.at(0) = &Parser::pushAssertCommand;
@@ -110,6 +110,9 @@ bool Parser::littleCommand(std::string expression, Token commandToken) {
     catch (OperandExceptions::ForbiddenMathsException const &e) {
         (this->*errorModeMethods)(e.what());
     }
+    catch (StackExceptions::PopOnEmptyStackException const &e) {
+        (this->*errorModeMethods)(e.what());
+    }
     catch (std::exception const &e) {
         throw e;
     }
@@ -134,6 +137,7 @@ void Parser::withoutErrorMode(std::string whatHappened) {
 void Parser::parse(std::vector<std::string> list) {
     bool isExit = false;
     for (std::string const &line : list) {
+        lineNumber++;
         std::string expression = line;
         lexer.findComment(expression);
         if (!expression.empty()) {
@@ -149,10 +153,10 @@ void Parser::parse(std::vector<std::string> list) {
             catch (std::exception const &e) {
                 (this->*errorModeMethods)(e.what());
             }
-            lineNumber++;
         }
     }
     if (!isExit) {
+        lineNumber++;
         LexerExceptions::NoExitInstructionException noExitInstructionException;
         (this->*errorModeMethods)(noExitInstructionException.what());
     }
