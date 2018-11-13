@@ -32,13 +32,13 @@ bool Stack::push(std::string const &value, eOperandType const &operandType) {
     return false;
 }
 
-bool Stack::assert(std::string const &value, eOperandType const &) {
+bool Stack::assert(std::string const &value, eOperandType const &operandType) {
     if (this->operandStack.empty())
         throw StackExceptions::TooFewValuesException();
 
     IOperand const *topOperand = this->operandStack.top();
 
-    if (std::stod(topOperand->toString()) != std::stod(value))
+    if (std::stod(topOperand->toString()) != std::stod(value) || topOperand->getType() != operandType)
         throw StackExceptions::FalseAssertException();
     return false;
 }

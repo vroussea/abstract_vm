@@ -1,0 +1,18 @@
+sub
+push int8(97)
+print
+push double(9.9)
+sub
+print
+dump
+push int8(96)
+push int8(1)
+sub
+print
+dump
+sub
+dump
+push int8(127)
+sub
+dump
+exit

@@ -1,0 +1,13 @@
+push int8(97)
+assert int16(97)
+assert int8(97)
+pop
+push double(-9.0009)
+assert double(9.0009)
+assert double(-9.0009)
+push int8(5)
+assert int8(5)
+pop
+pop
+assert int8(5)
+exit

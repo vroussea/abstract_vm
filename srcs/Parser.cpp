@@ -61,62 +61,23 @@ std::ostream &operator<<(std::ostream &o, Parser const &) {
 /* ******************************* */
 
 bool Parser::pushAssertCommand(std::string expression, Token commandToken) {
-    try {
-        Token typeToken = lexer.findType(expression);
-        if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_OPENER)
-            throw LexerExceptions::LexicalErrorException();
-        Token valueToken = lexer.findValue(expression);
-        if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_CLOSER)
-            throw LexerExceptions::LexicalErrorException();
-        if (!expression.empty())
-            throw LexerExceptions::LexicalErrorException();
-        return (stack->*paramStackMethods[commandToken.getCommandType()])(valueToken.getTokenValue(),
-                                                                          static_cast<eOperandType>(typeToken.getValueType()));
-    } catch (OperandExceptions::NotAnIntegerException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (LexerExceptions::LexicalErrorException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (OperandExceptions::UnderflowException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (OperandExceptions::OverflowException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (std::out_of_range const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (std::exception const &e) {
-        throw e;
-    }
-    return false;
+    Token typeToken = lexer.findType(expression);
+    if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_OPENER)
+        throw LexerExceptions::LexicalErrorException();
+    Token valueToken = lexer.findValue(expression);
+    if (lexer.findBracket(expression).getTokenType() != Token::BRACKET_CLOSER)
+        throw LexerExceptions::LexicalErrorException();
+    if (!expression.empty())
+        throw LexerExceptions::LexicalErrorException();
+    return (stack->*paramStackMethods[commandToken.getCommandType()])(
+            valueToken.getTokenValue(),
+            static_cast<eOperandType>(typeToken.getValueType()));
 }
 
 bool Parser::littleCommand(std::string expression, Token commandToken) {
-    try {
-        if (!expression.empty())
-            throw LexerExceptions::LexicalErrorException();
-        return (stack->*littleStackMethods[commandToken.getCommandType()])();
-    } catch (LexerExceptions::LexicalErrorException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (StackExceptions::FalseAssertException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (StackExceptions::TooFewValuesException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (OperandExceptions::ForbiddenMathsException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (StackExceptions::PopOnEmptyStackException const &e) {
-        (this->*errorModeMethods)(e.what());
-    }
-    catch (std::exception const &e) {
-        throw e;
-    }
-    return false;
+    if (!expression.empty())
+        throw LexerExceptions::LexicalErrorException();
+    return (stack->*littleStackMethods[commandToken.getCommandType()])();
 }
 
 void Parser::setErrorMode() {
@@ -147,7 +108,34 @@ void Parser::parse(std::vector<std::string> list) {
                     isExit = true;
                     break;
                 }
-            } catch (LexerExceptions::UnknownIntructionException const &e) {
+            } catch (OperandExceptions::NotAnIntegerException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (LexerExceptions::LexicalErrorException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (OperandExceptions::UnderflowException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (OperandExceptions::OverflowException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (std::out_of_range const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (StackExceptions::FalseAssertException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (StackExceptions::TooFewValuesException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (LexerExceptions::UnknownIntructionException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (OperandExceptions::ForbiddenMathsException const &e) {
+                (this->*errorModeMethods)(e.what());
+            }
+            catch (StackExceptions::PopOnEmptyStackException const &e) {
                 (this->*errorModeMethods)(e.what());
             }
             catch (std::exception const &e) {
