@@ -44,5 +44,5 @@ const char *OperandExceptions::UnderflowException::what() const noexcept {
 }
 
 const char *OperandExceptions::ForbiddenMathsException::what() const noexcept {
-    return "Division/modulo by 0 or floating number modulo in this line";
+    return "Forbidden math exception in this line";
 }

@@ -1,0 +1,22 @@
+push int8(97)
+mod
+
+print
+push int8(97)
+mod
+dump
+push int8(96)
+push int8(1)
+mod
+dump
+mod
+dump
+push int8(1)
+push double(127)
+mod
+dump
+push int32(-99999999)
+push int32(0)
+mod
+
+exit

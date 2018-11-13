@@ -1,5 +1,6 @@
-div
 push int8(97)
+div
+
 print
 push double(9.9)
 div
@@ -15,10 +16,8 @@ dump
 push int8(127)
 div
 dump
-push int8(-128)
-push int8(-1)
+push float(-9999999999999)
+push float(0)
 div
-push int8(-127)
-push int8(2)
-div
+
 exit

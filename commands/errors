@@ -1,0 +1,4 @@
+push 8(1)
+puch int8(2)
+dump
+exit
