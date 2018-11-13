@@ -12,4 +12,7 @@ print
 dump
 add
 dump
+push int8(100)
+push int8(100)
+add
 exit

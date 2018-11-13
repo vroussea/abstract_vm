@@ -28,13 +28,13 @@ TEST_CASE("test div short to char") {
     REQUIRE(dynamic_cast<const Operand<short> *>(divResult)->toString() == std::to_string('A'));
 }
 
-TEST_CASE("test div int to double") {
-    IOperand *double1 = new Operand<double>(eOperandType::Double, "1.1");
-    IOperand *int1 = new Operand<int>(eOperandType::Int32, "1");
+TEST_CASE("test div int by double") {
+    IOperand *double1 = new Operand<double>(eOperandType::Double, "2");
+    IOperand *int1 = new Operand<int>(eOperandType::Int32, "3");
 
-    IOperand const *divResult = (*double1 / *int1);
+    IOperand const *divResult = (*int1 / *double1);
 
-    REQUIRE(std::stof(dynamic_cast<const Operand<double> *>(divResult)->toString()) == 1.1f);
+    REQUIRE(std::stof(dynamic_cast<const Operand<double> *>(divResult)->toString()) == 1.5f);
 }
 
 TEST_CASE("test div two shorts") {

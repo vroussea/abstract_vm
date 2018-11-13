@@ -76,7 +76,7 @@ public:
         if (std::stold(rhs.toString()) == 0)
             throw OperandExceptions::ForbiddenMathsException();
 
-        T newValue = std::stold(this->toString()) / std::stold(rhs.toString());
+        long double newValue = std::stold(this->toString()) / std::stold(rhs.toString());
 
         if (rhs.getPrecision() > this->getPrecision())
             return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));
@@ -88,7 +88,7 @@ public:
         if (std::stold(rhs.toString()) == 0 || this->getPrecision() > 2 || rhs.getPrecision() > 2)
             throw OperandExceptions::ForbiddenMathsException();
 
-        T newValue = std::stol(this->toString()) % std::stol(rhs.toString());
+        long double newValue = std::stol(this->toString()) % std::stol(rhs.toString());
 
         if (rhs.getPrecision() > this->getPrecision())
             return operandFactory.createOperand(rhs.getType(), std::to_string(newValue));

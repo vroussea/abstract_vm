@@ -1,21 +1,24 @@
-sub
+div
 push int8(97)
 print
 push double(9.9)
-sub
+div
 print
 dump
 push int8(96)
 push int8(1)
-sub
+div
 print
 dump
-sub
+div
 dump
 push int8(127)
-sub
+div
 dump
-push int8(-100)
-push int8(100)
-sub
+push int8(-128)
+push int8(-1)
+div
+push int8(-127)
+push int8(2)
+div
 exit
